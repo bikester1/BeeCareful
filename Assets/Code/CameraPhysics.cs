@@ -26,9 +26,7 @@ public class CameraPhysics : MonoBehaviour
         if (Input.GetMouseButton(1))
         {
             position.x += (Input.GetAxisRaw("Mouse X") * lookSensitivity);
-            Debug.Log("Broken: " + Input.GetAxisRaw("Mouse X") * lookSensitivity);
-            Debug.Log("Working: " + Input.GetAxisRaw("Mouse X") * 3);
-            position.y -= Input.GetAxisRaw("Mouse Y");
+            position.y -= (Input.GetAxisRaw("Mouse Y") * lookSensitivity);
         }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
