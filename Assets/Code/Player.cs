@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour, CollisionCallable
 {
     public float speed;
+    public float jumpHeight;
 
     private CapsuleCollider myCollider;
     private Camera myCam;
@@ -14,7 +15,6 @@ public class Player : MonoBehaviour, CollisionCallable
     private Canvas myCanvas;
     public Text myDebugText;
     private bool isGrounded;
-    private int groundContactCount;
     public bool debugMode = false;
 
     // Start is called before the first frame update
@@ -24,10 +24,7 @@ public class Player : MonoBehaviour, CollisionCallable
         myCam = GetComponentInChildren<Camera>();
         myRigidbody = GetComponentInChildren<Rigidbody>();
         myCanvas = myCam.GetComponentInChildren<Canvas>();
-        Debug.Log(myCanvas.transform.childCount);
-        Debug.Log(myCanvas.transform.GetChild(0).GetType());
         myDebugText = myCanvas.GetComponentInChildren<Text>();
-        groundContactCount = 0;
     }
 
     // Update is called once per frame
@@ -88,14 +85,12 @@ public class Player : MonoBehaviour, CollisionCallable
         Vector3 inputVelocity = inputDirCam * speed;
 
         // move player
-        myRigidbody.velocity = new Vector3(inputVelocity.x, myRigidbody.velocity.y + inputVelocity.y, inputVelocity.z);
+        myRigidbody.velocity = new Vector3(inputVelocity.x, myRigidbody.velocity.y + (inputVelocity.y * jumpHeight), inputVelocity.z);
 
-        //transform.position += inputVelocity * Time.deltaTime;
 
         if (debugMode) Debug.DrawLine(myRigidbody.position, myRigidbody.position + (inputVelocity));
         myDebugText.text = "Position: " + myRigidbody.position.y;
         myDebugText.text += "\nInputDir: " + inputVelocity;
-        myDebugText.text += "\nGround Contact Count: " + groundContactCount;
 
         if (Input.GetKeyDown(KeyCode.L))
         {
@@ -113,15 +108,13 @@ public class Player : MonoBehaviour, CollisionCallable
 
     void CollisionCallable.OnCollisionEnter(Collision collision)
     {
-        List<ContactPoint> contacts = new List<ContactPoint>();
+        ContactPoint[] contacts = new ContactPoint[100];
         collision.GetContacts(contacts);
-        foreach (ContactPoint contact in contacts)
+        for(int i = 0; i < collision.contactCount; i++)
         {
-            if (contact.thisCollider != null && contact.point.y < myRigidbody.position.y - 0.5) {
+            if (contacts[i].thisCollider != null && contacts[i].point.y < myRigidbody.position.y - 0.5) {
                 isGrounded = true;
-                Debug.Log("Contact: " + contact.point.y);
-                Debug.Log("idl" + contact.thisCollider);
-                Debug.DrawLine(myRigidbody.position, contact.point, Color.white, 10);
+                Debug.DrawLine(myRigidbody.position, contacts[i].point, Color.white, 10);
             }
             
         }
@@ -129,17 +122,14 @@ public class Player : MonoBehaviour, CollisionCallable
 
     public void OnCollisionStay(Collision collision)
     {
-        List<ContactPoint> contacts = new List<ContactPoint>();
+        ContactPoint[] contacts = new ContactPoint[100];
         collision.GetContacts(contacts);
-        foreach (ContactPoint contact in contacts)
+        for (int i = 0; i < collision.contactCount; i++)
         {
-            if (contact.thisCollider != null && contact.point.y < myRigidbody.position.y - 0.5)
+            if (contacts[i].thisCollider != null && contacts[i].point.y < myRigidbody.position.y - 0.5)
             {
                 isGrounded = true;
-                //groundContactCount++;
-                Debug.Log("Contact: " + contact.point.y);
-                Debug.Log("idl" + contact.thisCollider);
-                //Debug.DrawLine(myRigidbody.position, contact.point, Color.white, 10);
+                Debug.DrawLine(myRigidbody.position, contacts[i].point, Color.white, 10);
             }
 
         }
@@ -150,7 +140,6 @@ public class Player : MonoBehaviour, CollisionCallable
         List<ContactPoint> contacts = new List<ContactPoint>();
         collision.GetContacts(contacts);
         isGrounded = false;
-        groundContactCount = 0;
     }
 
 }

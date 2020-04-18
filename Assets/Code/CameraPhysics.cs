@@ -10,6 +10,7 @@ public class CameraPhysics : MonoBehaviour
     // z: distance
     public Vector3 position;
     public Rigidbody targetRigidbody;
+    public float lookSensitivity = 1;
  
     // Start is called before the first frame update
     void Start()
@@ -24,7 +25,10 @@ public class CameraPhysics : MonoBehaviour
     {
         if (Input.GetMouseButton(1))
         {
-            Input.GetAxisRaw("Mouse X");
+            position.x += (Input.GetAxisRaw("Mouse X") * lookSensitivity);
+            Debug.Log("Broken: " + Input.GetAxisRaw("Mouse X") * lookSensitivity);
+            Debug.Log("Working: " + Input.GetAxisRaw("Mouse X") * 3);
+            position.y -= Input.GetAxisRaw("Mouse Y");
         }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
