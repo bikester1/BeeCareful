@@ -13,7 +13,9 @@ public class CameraPhysics : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        // set distance
+        this.transform.position = this.position.normalized * position.z;
+
     }
 
     // Update is called once per frame
@@ -21,15 +23,23 @@ public class CameraPhysics : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            Debug.Log(this.GetComponentInParent<Transform>().position);
-            Debug.Log("Angle: " + this.transform.rotation.eulerAngles);
-            this.transform.LookAt(this.transform.parent.transform.position, Vector3.up);
+            position.x -= 1f;
         }
-        if (Input.GetKey(KeyCode.Mouse1))
+        if (Input.GetKey(KeyCode.RightArrow))
         {
-            Debug.Log(this.GetComponentInParent<Transform>().position);
-            Debug.Log("Angle: " + this.transform.rotation.eulerAngles);
-            this.transform.LookAt(this.transform.parent.transform.position, Vector3.up);
+            position.x += 1f;
         }
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            position.y += 1f;
+        }
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            position.y -= 1f;
+        }
+
+
+        this.transform.position = this.transform.parent.transform.position + Quaternion.Euler(position.y, position.x, 0) * new Vector3(0, 0, -position.z);
+        this.transform.LookAt(this.transform.parent.transform.position, Vector3.up);
     }
 }

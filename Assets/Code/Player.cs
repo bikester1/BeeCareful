@@ -35,11 +35,11 @@ public class Player : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.W))
         {
-            this.transform.position +=  Vector3.forward * speed * Time.deltaTime;
+            this.transform.position +=  Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y, cam.transform.rotation.eulerAngles.z) * Vector3.forward * speed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.S))
         {
-            this.transform.position += Vector3.back * speed * Time.deltaTime;
+            this.transform.position += Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y, cam.transform.rotation.eulerAngles.z) * Vector3.back * speed * Time.deltaTime;
         }
         #endregion
 
