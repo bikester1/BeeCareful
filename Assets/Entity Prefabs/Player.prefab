@@ -101,6 +101,8 @@ MonoBehaviour:
   position: {x: 63.75001, y: 22.200005, z: 10}
   targetRigidbody: {fileID: 624062255}
   lookSensitivity: 3
+  zoomSensitivity: 3
+  plantingReach: 20
 --- !u!1 &397061156
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,7 +115,7 @@ GameObject:
   - component: {fileID: 397061160}
   - component: {fileID: 397061159}
   - component: {fileID: 397061158}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Debug Window
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -211,7 +213,7 @@ GameObject:
   - component: {fileID: 1225833353}
   - component: {fileID: 1225833355}
   - component: {fileID: 1225833354}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -653,7 +655,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4595348877752076379}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.62, z: 0}
+  m_LocalPosition: {x: 0, y: -0.72, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2344287119553974820}

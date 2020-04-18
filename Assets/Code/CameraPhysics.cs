@@ -11,8 +11,12 @@ public class CameraPhysics : MonoBehaviour
     public Vector3 position;
     public Rigidbody targetRigidbody;
     public float lookSensitivity = 1;
+    public float zoomSensitivity = 3;
+    public float plantingReach = 20f;
     private Camera myCam;
     private bool planting = false;
+    private GameObject plant;
+    private PrefabManager prefabManager;
  
     // Start is called before the first frame update
     void Start()
@@ -21,6 +25,7 @@ public class CameraPhysics : MonoBehaviour
         this.transform.position = this.position.normalized * position.z;
         targetRigidbody = transform.parent.GetComponentInChildren<Rigidbody>();
         myCam = GetComponent<Camera>();
+        prefabManager = GameObject.FindObjectOfType<PrefabManager>();
     }
 
     // Update is called once per frame
@@ -48,6 +53,7 @@ public class CameraPhysics : MonoBehaviour
             position.y -= 1f;
         }
 
+        position.z -= Input.GetAxisRaw("Mouse ScrollWheel") * zoomSensitivity;
 
         this.transform.position = targetRigidbody.position + Quaternion.Euler(position.y, position.x, 0) * new Vector3(0, 0, -position.z);
         this.transform.LookAt(targetRigidbody.position, Vector3.up);
@@ -61,16 +67,20 @@ public class CameraPhysics : MonoBehaviour
         Debug.DrawRay(ray.origin, ray.direction * 10, Color.white);
 
         RaycastHit hit;
-        
+        LayerMask mask = LayerMask.GetMask("Ground");
 
-        if(Physics.Raycast(ray, out hit, 15f))
+
+        if(Physics.Raycast(ray, out hit, plantingReach, mask))
         {
+            if (plant == null) plant = Instantiate(prefabManager.flowerBasic);
+
+            if(hit.transform.tag.Contains("Plantable")) plant.GetComponent<Transform>().position = hit.point;
 
         }
 
         if (Input.GetMouseButton(0))
         {
-
+            plant = null;
         }
     }
 
