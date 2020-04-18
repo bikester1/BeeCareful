@@ -35,28 +35,28 @@ public class Player : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.W))
         {
-            this.transform.position += cam.transform.rotation * Vector3.forward * speed * Time.deltaTime;
+            this.transform.position +=  Vector3.forward * speed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.S))
         {
-            this.transform.position += cam.transform.rotation * Vector3.back * speed * Time.deltaTime;
+            this.transform.position += Vector3.back * speed * Time.deltaTime;
         }
         #endregion
 
         #region Vetical Movement
         if (Input.GetKey(KeyCode.LeftControl))
         {
-            this.transform.position += cam.transform.rotation * Vector3.down * speed * Time.deltaTime;
+            this.transform.position += Vector3.down * speed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.Space))
         {
-            this.transform.position += cam.transform.rotation * Vector3.up * speed * Time.deltaTime;
+            this.transform.position += Vector3.up * speed * Time.deltaTime;
         }
         #endregion
 
         if (Input.GetKeyDown(KeyCode.L))
         {
-            Debug.Log(cam.transform.rotation.eulerAngles);
+            Debug.Log(this.transform.position);
         }
     }
 }
