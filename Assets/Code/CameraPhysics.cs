@@ -59,6 +59,19 @@ public class CameraPhysics : MonoBehaviour
     {
         Ray ray = myCam.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
         Debug.DrawRay(ray.origin, ray.direction * 10, Color.white);
+
+        RaycastHit hit;
+        
+
+        if(Physics.Raycast(ray, out hit, 15f))
+        {
+
+        }
+
+        if (Input.GetMouseButton(0))
+        {
+
+        }
     }
 
     public void placePlant()
