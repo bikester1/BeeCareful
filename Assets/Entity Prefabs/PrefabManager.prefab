@@ -45,5 +45,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flowerBasic: {fileID: 2872999805267505337, guid: 2b70d51a6d075694f9547417ad075a77,
     type: 3}
-  bee: {fileID: 0}
-  hive: {fileID: 0}
+  bee: {fileID: 1537878482982758113, guid: fa1f46fae31daaa41a1448d15a51ba80, type: 3}
+  hive: {fileID: 3478002016712877707, guid: 250608cc69383424cb6cbb42852b9b00, type: 3}
