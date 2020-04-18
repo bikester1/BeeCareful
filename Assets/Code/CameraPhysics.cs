@@ -11,6 +11,8 @@ public class CameraPhysics : MonoBehaviour
     public Vector3 position;
     public Rigidbody targetRigidbody;
     public float lookSensitivity = 1;
+    private Camera myCam;
+    private bool planting = false;
  
     // Start is called before the first frame update
     void Start()
@@ -18,6 +20,7 @@ public class CameraPhysics : MonoBehaviour
         // set distance
         this.transform.position = this.position.normalized * position.z;
         targetRigidbody = transform.parent.GetComponentInChildren<Rigidbody>();
+        myCam = GetComponent<Camera>();
     }
 
     // Update is called once per frame
@@ -26,9 +29,7 @@ public class CameraPhysics : MonoBehaviour
         if (Input.GetMouseButton(1))
         {
             position.x += (Input.GetAxisRaw("Mouse X") * lookSensitivity);
-            Debug.Log("Broken: " + Input.GetAxisRaw("Mouse X") * lookSensitivity);
-            Debug.Log("Working: " + Input.GetAxisRaw("Mouse X") * 3);
-            position.y -= Input.GetAxisRaw("Mouse Y");
+            position.y -= (Input.GetAxisRaw("Mouse Y") * lookSensitivity);
         }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
@@ -50,5 +51,19 @@ public class CameraPhysics : MonoBehaviour
 
         this.transform.position = targetRigidbody.position + Quaternion.Euler(position.y, position.x, 0) * new Vector3(0, 0, -position.z);
         this.transform.LookAt(targetRigidbody.position, Vector3.up);
+
+        if (planting) UpdatePlant();
+    }
+
+    void UpdatePlant()
+    {
+        Ray ray = myCam.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
+        Debug.DrawRay(ray.origin, ray.direction * 10, Color.white);
+    }
+
+    public void placePlant()
+    {
+        planting = true;
+        Debug.Log("planting Started");
     }
 }
