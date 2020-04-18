@@ -1,21 +1,61 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Bee : Entity
-
-    
+public class Bee : Entity 
 {
-    // Start is called before the first frame update
+
+    //public float verticalSpeed;
+    //public float amplitude;
+    private bool hasPollinated;
+    public int maxPollinationCount;
+    private int pollinationCount;
+    public Rigidbody beeRigidBody;
+    //public float speed;
+    public float forceMultiplier;
+    
+
+
+    private Vector3 tempPosition;
+    private Vector3 target;
+
     void Start()
     {
+        hasPollinated = false;
+        pollinationCount = 0;
+        tempPosition = transform.position;
+        findTargetPosition();
+    }
+
+    void Update()
+    {
+
+        //Creates an upward and downward movement for the bee.
+        //Quaternion.RotateTowards(transform.rotation.eulerAngles, )
+        //float step = speed * Time.deltaTime;
+        //transform.position = Vector3.MoveTowards(transform.position, target, step);
+        beeRigidBody.transform.LookAt(target);
+        beeRigidBody.velocity = transform.forward.normalized * forceMultiplier;
+        //tempPosition.y = Mathf.Sin(Time.realtimeSinceStartup * verticalSpeed)*amplitude;
+        //transform.position = new Vector3(transform.position.x, tempPosition.y,transform.position.z);
+
+    }
+
+    Vector3 findTargetPosition()
+    {
+        if (pollinationCount < maxPollinationCount)
+        {
+            pollinationCount++;
+            target = GameObject.FindGameObjectWithTag("Plant").transform.position;
+            return target;
+        } else
+        {
+            target = GameObject.Find("Hive").transform.position;
+            return target;
+        }
         
     }
 
-    // Update is called once per frame
-    void Update()
+    void SpawnBee()
     {
-        transform.rotation.SetEulerAngles(Vector3.RotateTowards(transform.rotation.eulerAngles, GameObject.Find("Flower").transform.position, .2f, .32f));
-        transform.position = Vector3.MoveTowards(transform.position, GameObject.Find("Flower").transform.position, .2f);
+
     }
 }
