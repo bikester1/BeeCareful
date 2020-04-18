@@ -24,4 +24,14 @@ public class CollisionCallback : MonoBehaviour
     {
         callableObject.OnCollisionEnter(collision);
     }
+
+    void OnCollisionStay(Collision collision)
+    {
+        callableObject.OnCollisionStay(collision);
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        callableObject.OnCollisionExit(collision);
+    }
 }

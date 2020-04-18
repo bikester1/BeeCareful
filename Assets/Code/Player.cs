@@ -14,6 +14,7 @@ public class Player : MonoBehaviour, CollisionCallable
     private Canvas myCanvas;
     public Text myDebugText;
     private bool isGrounded;
+    private int groundContactCount;
     public bool debugMode = false;
 
     // Start is called before the first frame update
@@ -26,6 +27,7 @@ public class Player : MonoBehaviour, CollisionCallable
         Debug.Log(myCanvas.transform.childCount);
         Debug.Log(myCanvas.transform.GetChild(0).GetType());
         myDebugText = myCanvas.GetComponentInChildren<Text>();
+        groundContactCount = 0;
     }
 
     // Update is called once per frame
@@ -91,9 +93,9 @@ public class Player : MonoBehaviour, CollisionCallable
         //transform.position += inputVelocity * Time.deltaTime;
 
         if (debugMode) Debug.DrawLine(myRigidbody.position, myRigidbody.position + (inputVelocity));
-        if (debugMode) Debug.Log(myRigidbody.position);
-        myDebugText.text = "Position: " + myRigidbody.position;
+        myDebugText.text = "Position: " + myRigidbody.position.y;
         myDebugText.text += "\nInputDir: " + inputVelocity;
+        myDebugText.text += "\nGround Contact Count: " + groundContactCount;
 
         if (Input.GetKeyDown(KeyCode.L))
         {
@@ -113,10 +115,42 @@ public class Player : MonoBehaviour, CollisionCallable
     {
         List<ContactPoint> contacts = new List<ContactPoint>();
         collision.GetContacts(contacts);
-
         foreach (ContactPoint contact in contacts)
         {
-            Debug.Log(contact);
+            if (contact.thisCollider != null && contact.point.y < myRigidbody.position.y - 0.5) {
+                isGrounded = true;
+                Debug.Log("Contact: " + contact.point.y);
+                Debug.Log("idl" + contact.thisCollider);
+                Debug.DrawLine(myRigidbody.position, contact.point, Color.white, 10);
+            }
+            
         }
     }
+
+    public void OnCollisionStay(Collision collision)
+    {
+        List<ContactPoint> contacts = new List<ContactPoint>();
+        collision.GetContacts(contacts);
+        foreach (ContactPoint contact in contacts)
+        {
+            if (contact.thisCollider != null && contact.point.y < myRigidbody.position.y - 0.5)
+            {
+                isGrounded = true;
+                //groundContactCount++;
+                Debug.Log("Contact: " + contact.point.y);
+                Debug.Log("idl" + contact.thisCollider);
+                //Debug.DrawLine(myRigidbody.position, contact.point, Color.white, 10);
+            }
+
+        }
+    }
+
+    public void OnCollisionExit(Collision collision)
+    {
+        List<ContactPoint> contacts = new List<ContactPoint>();
+        collision.GetContacts(contacts);
+        isGrounded = false;
+        groundContactCount = 0;
+    }
+
 }

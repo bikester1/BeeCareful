@@ -10,5 +10,9 @@ namespace Assets.Code
     public interface CollisionCallable
     {
         void OnCollisionEnter(Collision collision);
+
+        void OnCollisionStay(Collision collision);
+
+        void OnCollisionExit(Collision collision);
     }
 }
