@@ -9,18 +9,23 @@ public class CameraPhysics : MonoBehaviour
     // y: height
     // z: distance
     public Vector3 position;
+    public Rigidbody targetRigidbody;
  
     // Start is called before the first frame update
     void Start()
     {
         // set distance
         this.transform.position = this.position.normalized * position.z;
-
+        targetRigidbody = transform.parent.GetComponentInChildren<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetMouseButton(1))
+        {
+            Input.GetAxisRaw("Mouse X");
+        }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             position.x -= 1f;
@@ -39,7 +44,7 @@ public class CameraPhysics : MonoBehaviour
         }
 
 
-        this.transform.position = this.transform.parent.transform.position + Quaternion.Euler(position.y, position.x, 0) * new Vector3(0, 0, -position.z);
-        this.transform.LookAt(this.transform.parent.transform.position, Vector3.up);
+        this.transform.position = targetRigidbody.position + Quaternion.Euler(position.y, position.x, 0) * new Vector3(0, 0, -position.z);
+        this.transform.LookAt(targetRigidbody.position, Vector3.up);
     }
 }
