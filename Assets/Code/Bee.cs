@@ -29,6 +29,7 @@ public class Bee : Entity
 
     //Bee close to flower
     public float targetRange;
+    public Vector3 heightDisplacement; //Height above plant bee should hover
 
     void Start()
     {
@@ -56,7 +57,7 @@ public class Bee : Entity
                 break;
 
             case 3: //Bee is within range of target
-
+                CloseToTarget();
                 break;
 
             case 4: //Bee returns to hive
@@ -126,7 +127,9 @@ public class Bee : Entity
 
     void CloseToTarget()
     {
-
+        tempSwayData.x = Mathf.Cos(Time.realtimeSinceStartup * sidewaysSwaySpeed) * verticalAmplitude;
+        tempSwayData.y = Mathf.Sin(Time.realtimeSinceStartup * verticalSwaySpeed) * horizontalAmplitude;
+        beeRigidBody.velocity += tempSwayData;
     }
 
 }
