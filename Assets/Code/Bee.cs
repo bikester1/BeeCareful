@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Assets.Code;
+using UnityEngine;
 
-public class Bee : Entity 
+public class Bee : Entity
 {
 
     //General
@@ -176,10 +177,31 @@ public class Bee : Entity
         beeRigidBody.velocity = tempSwayData;
     }
 
+<<<<<<< HEAD
     public void changeBehaviorType(int x)
     {
         behaviorType = x;
     }
 
+=======
+<<<<<<< HEAD
+    public void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("BeeCollision");
+        ContactPoint[] contacts = new ContactPoint[collision.contactCount];
+        collision.GetContacts(contacts);
+=======
+>>>>>>> 4147037c244b3f42ad37bcc5478d03c08e60aea4
+>>>>>>> c83e507805458180a624316696fd291aa9f798d3
 
+        for(int i = 0; i < collision.contactCount; i++)
+        {
+            Debug.Log(contacts[i].otherCollider.transform.tag);
+            if (contacts[i].otherCollider.transform.tag.Contains("Player"))
+            {
+                Debug.Log("Destroy all humans");
+                Destroy(this.gameObject);
+            }
+        }
+    }
 }
