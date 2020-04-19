@@ -153,8 +153,8 @@ public class Bee : Entity
     {
         beeRigidBody.transform.LookAt(target);
         beeRigidBody.velocity = transform.forward.normalized * forwardSpeed;
-        tempSwayData.x = Mathf.Cos(Time.realtimeSinceStartup * sidewaysSwaySpeed *randomOffset) * horizontalAmplitude;
-        tempSwayData.y = Mathf.Sin(Time.realtimeSinceStartup * verticalSwaySpeed * randomOffset) * verticalAmplitude;
+        tempSwayData.x = Mathf.Cos(Time.realtimeSinceStartup * sidewaysSwaySpeed + randomOffset) * horizontalAmplitude;
+        tempSwayData.y = Mathf.Sin(Time.realtimeSinceStartup * verticalSwaySpeed + randomOffset) * verticalAmplitude;
         beeRigidBody.velocity += tempSwayData;
 
         if (Vector3.Distance(target, transform.position)<targetRange)
@@ -176,21 +176,30 @@ public class Bee : Entity
     {
         beeRigidBody.transform.LookAt(target);
         beeRigidBody.velocity = transform.forward.normalized * forwardSpeed;
-        tempSwayData.y = Mathf.Sin(Time.realtimeSinceStartup * verticalSwaySpeed* randomOffset) * verticalAmplitude;
+        tempSwayData.y = Mathf.Sin(Time.realtimeSinceStartup * verticalSwaySpeed + randomOffset) * verticalAmplitude;
         beeRigidBody.velocity += tempSwayData;
         float upperX = target.x + .1f;
         float lowerX = target.x - .1f;
         float upperZ = target.z + .1f;
         float lowerZ = target.z - .1f;
-        if (transform.position.x <= upperX && transform.position.x >= lowerX && transform.position.z <= upperZ && transform.position.z >= lowerZ) behaviorType = 4;
+        if (transform.position.x <= upperX && transform.position.x >= lowerX && transform.position.z <= upperZ && transform.position.z >= lowerZ)
+        {
+            //CHANGE PLANT BOOL INRANGE TO TRUE
+            behaviorType = 4;
+        }
     }
 
     void Hover()
     {
-        tempSwayData.x = Mathf.Sin(Time.realtimeSinceStartup * hoverSidewaysSpeed * randomOffset) * sidewaysHoverAmplitude;
-        tempSwayData.z = Mathf.Cos(Time.realtimeSinceStartup * hoverSidewaysSpeed * randomOffset) * sidewaysHoverAmplitude;
-        tempSwayData.y = Mathf.Sin(Time.realtimeSinceStartup * verticalSwaySpeed * randomOffset) * verticalHoverAmplitude;
+        tempSwayData.x = Mathf.Sin(Time.realtimeSinceStartup * hoverSidewaysSpeed + randomOffset) * sidewaysHoverAmplitude;
+        tempSwayData.z = Mathf.Cos(Time.realtimeSinceStartup * hoverSidewaysSpeed + randomOffset) * sidewaysHoverAmplitude;
+        tempSwayData.y = Mathf.Sin(Time.realtimeSinceStartup * verticalSwaySpeed + randomOffset) * verticalHoverAmplitude;
         beeRigidBody.velocity = tempSwayData;
+    }
+
+    public void changeBehaviorType(int x)
+    {
+        behaviorType = x;
     }
 
     public void OnCollisionEnter(Collision collision)
