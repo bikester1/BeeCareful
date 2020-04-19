@@ -37,6 +37,7 @@ public class Bee : Entity
     public float sidewaysHoverAmplitude;
     public float hoverVerticalSpeed;
     public float hoverSidewaysSpeed;
+    private float randomOffset;
 
     void Start()
     {
@@ -44,6 +45,8 @@ public class Bee : Entity
         hasPollinated = false;
         pollinationCount = 0;
         tempSwayData = Vector3.zero;
+        randomOffset = Random.Range(0f,2*Mathf.PI);
+
 
         //Finds the bee a target
         behaviorType = 1;
@@ -139,8 +142,8 @@ public class Bee : Entity
     {
         beeRigidBody.transform.LookAt(target);
         beeRigidBody.velocity = transform.forward.normalized * forwardSpeed;
-        tempSwayData.x = Mathf.Cos(Time.realtimeSinceStartup * sidewaysSwaySpeed) * horizontalAmplitude;
-        tempSwayData.y = Mathf.Sin(Time.realtimeSinceStartup * verticalSwaySpeed) * verticalAmplitude;
+        tempSwayData.x = Mathf.Cos(Time.realtimeSinceStartup * sidewaysSwaySpeed *randomOffset) * horizontalAmplitude;
+        tempSwayData.y = Mathf.Sin(Time.realtimeSinceStartup * verticalSwaySpeed * randomOffset) * verticalAmplitude;
         beeRigidBody.velocity += tempSwayData;
 
         if (Vector3.Distance(findTargetPosition(), transform.position)<targetRange)
@@ -153,7 +156,7 @@ public class Bee : Entity
     {
         beeRigidBody.transform.LookAt(target);
         beeRigidBody.velocity = transform.forward.normalized * forwardSpeed;
-        tempSwayData.y = Mathf.Sin(Time.realtimeSinceStartup * verticalSwaySpeed) * verticalAmplitude;
+        tempSwayData.y = Mathf.Sin(Time.realtimeSinceStartup * verticalSwaySpeed* randomOffset) * verticalAmplitude;
         beeRigidBody.velocity += tempSwayData;
         float upperX = target.x + .1f;
         float lowerX = target.x - .1f;
@@ -164,17 +167,20 @@ public class Bee : Entity
 
     void Hover()
     {
-        tempSwayData.x = Mathf.Sin(Time.realtimeSinceStartup * hoverSidewaysSpeed) * sidewaysHoverAmplitude;
-        tempSwayData.z = Mathf.Cos(Time.realtimeSinceStartup * hoverSidewaysSpeed) * sidewaysHoverAmplitude;
-        tempSwayData.y = Mathf.Sin(Time.realtimeSinceStartup * verticalSwaySpeed) * verticalHoverAmplitude;
+        tempSwayData.x = Mathf.Sin(Time.realtimeSinceStartup * hoverSidewaysSpeed * randomOffset) * sidewaysHoverAmplitude;
+        tempSwayData.z = Mathf.Cos(Time.realtimeSinceStartup * hoverSidewaysSpeed * randomOffset) * sidewaysHoverAmplitude;
+        tempSwayData.y = Mathf.Sin(Time.realtimeSinceStartup * verticalSwaySpeed * randomOffset) * verticalHoverAmplitude;
         beeRigidBody.velocity = tempSwayData;
     }
 
+<<<<<<< HEAD
     public void OnCollisionEnter(Collision collision)
     {
         Debug.Log("BeeCollision");
         ContactPoint[] contacts = new ContactPoint[collision.contactCount];
         collision.GetContacts(contacts);
+=======
+>>>>>>> 4147037c244b3f42ad37bcc5478d03c08e60aea4
 
         for(int i = 0; i < collision.contactCount; i++)
         {
