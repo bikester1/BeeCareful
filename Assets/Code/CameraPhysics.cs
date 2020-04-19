@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Security.AccessControl;
 using UnityEngine;
 
 public class CameraPhysics : MonoBehaviour
@@ -10,12 +11,18 @@ public class CameraPhysics : MonoBehaviour
     // z: distance
     public Vector3 position;
     public Rigidbody targetRigidbody;
+
+    // public variables
     public float lookSensitivity = 1;
     public float zoomSensitivity = 3;
     public float plantingReach = 20f;
+
     private Camera myCam;
-    private bool planting = false;
-    private GameObject plant;
+    private bool placing = false;
+    private GameObject placable;
+    private Vector3 placementOffset;
+
+    // needed to create prefabs
     private PrefabManager prefabManager;
  
     // Start is called before the first frame update
@@ -55,10 +62,11 @@ public class CameraPhysics : MonoBehaviour
 
         position.z -= Input.GetAxisRaw("Mouse ScrollWheel") * zoomSensitivity;
 
+        // add camera position info to the targets position and then look at the target
         this.transform.position = targetRigidbody.position + Quaternion.Euler(position.y, position.x, 0) * new Vector3(0, 0, -position.z);
         this.transform.LookAt(targetRigidbody.position, Vector3.up);
 
-        if (planting) UpdatePlant();
+        if (placing) UpdatePlant();
     }
 
     void UpdatePlant()
@@ -70,23 +78,35 @@ public class CameraPhysics : MonoBehaviour
         LayerMask mask = LayerMask.GetMask("Ground");
 
 
-        if(Physics.Raycast(ray, out hit, plantingReach, mask))
+        if(Physics.Raycast(ray, out hit, Mathf.Infinity, mask))
         {
-            if (plant == null) plant = Instantiate(prefabManager.flowerBasic);
 
-            if(hit.transform.tag.Contains("Plantable")) plant.GetComponent<Transform>().position = hit.point;
+            if(hit.transform.tag.Contains("Plantable")) placable.GetComponent<Transform>().position = hit.point + placementOffset;
 
         }
 
         if (Input.GetMouseButton(0))
         {
-            plant = null;
+            placable = null;
+            placing = false;
         }
     }
 
     public void placePlant()
     {
-        planting = true;
+        placing = true;
+        placementOffset = Vector3.zero;
+        placable = Instantiate(prefabManager.flowerBasic);
+        placable.GetComponent<Transform>().position = new Vector3(0, -10000, 0);
+        Debug.Log("planting Started");
+    }
+
+    public void placeBee()
+    {
+        placing = true;
+        placementOffset = Vector3.up * 2;
+        placable = Instantiate(prefabManager.bee);
+        placable.GetComponent<Transform>().position = new Vector3(0, -10000, 0);
         Debug.Log("planting Started");
     }
 }

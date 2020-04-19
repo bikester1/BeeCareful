@@ -108,7 +108,7 @@ public class Player : MonoBehaviour, CollisionCallable
 
     void CollisionCallable.OnCollisionEnter(Collision collision)
     {
-        ContactPoint[] contacts = new ContactPoint[100];
+        ContactPoint[] contacts = new ContactPoint[collision.contactCount];
         collision.GetContacts(contacts);
         for(int i = 0; i < collision.contactCount; i++)
         {
@@ -122,7 +122,7 @@ public class Player : MonoBehaviour, CollisionCallable
 
     public void OnCollisionStay(Collision collision)
     {
-        ContactPoint[] contacts = new ContactPoint[100];
+        ContactPoint[] contacts = new ContactPoint[collision.contactCount];
         collision.GetContacts(contacts);
         for (int i = 0; i < collision.contactCount; i++)
         {
