@@ -494,7 +494,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  jumpHeight: 2
+  jumpHeight: 1
+  jumpForgiveness: 0.075
   myDebugText: {fileID: 1225833354}
   debugMode: 1
 --- !u!1 &2627012209067239123
@@ -849,7 +850,7 @@ GameObject:
   - component: {fileID: 624062256}
   m_Layer: 0
   m_Name: Model
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

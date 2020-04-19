@@ -8,6 +8,9 @@ public class Player : MonoBehaviour, CollisionCallable
 {
     public float speed;
     public float jumpHeight;
+    public float jumpForgiveness;
+    private float jumpTimer;
+    private bool jumped = false;
 
     private CapsuleCollider myCollider;
     private Camera myCam;
@@ -16,6 +19,7 @@ public class Player : MonoBehaviour, CollisionCallable
     public Text myDebugText;
     private bool isGrounded;
     public bool debugMode = false;
+    private float groundCollisionTime;
 
     // Start is called before the first frame update
     void Start()
@@ -45,6 +49,8 @@ public class Player : MonoBehaviour, CollisionCallable
         // Sum inputs and then finanly normalize for consitent movement speed
         Vector3 inputDir = Vector3.zero;
 
+        if (Time.realtimeSinceStartup- groundCollisionTime > Time.fixedDeltaTime) isGrounded = false;
+
         #region Horizontal Movement
         if (Input.GetKey(KeyCode.A))
         {
@@ -64,19 +70,47 @@ public class Player : MonoBehaviour, CollisionCallable
         }
         #endregion
 
+        inputDir.Normalize();
+
         #region Vetical Movement
         if (isGrounded && Input.GetKeyDown(KeyCode.LeftControl))
         {
             inputDir += Vector3.down;
         }
-        if (isGrounded && Input.GetKeyDown(KeyCode.Space))
+
+        // step timer for jump
+        if (jumped)
         {
-            inputDir += Vector3.up;
+            jumpTimer += Time.deltaTime;
         }
+
+        // cancel jump if past forgiveness time
+        if(jumpTimer > jumpForgiveness)
+        {
+            jumpTimer = 0;
+            jumped = false;
+        }
+
+        // initiate jump
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            jumped = true;
+            jumpTimer = 0;
+        }
+
+        // jump
+        if(isGrounded && jumped)
+        {
+            inputDir = Vector3.up;
+            jumped = false;
+            jumpTimer = 0;
+            isGrounded = false;
+        }
+
         #endregion
 
         // Make input Dir Magnitude 1
-        inputDir.Normalize();
+
 
         // represents the input direction rotated to match the camera.
         Vector3 inputDirCam = Quaternion.Euler(0, myCam.transform.rotation.eulerAngles.y, myCam.transform.rotation.eulerAngles.z) * inputDir;
@@ -91,11 +125,13 @@ public class Player : MonoBehaviour, CollisionCallable
         if (debugMode) Debug.DrawLine(myRigidbody.position, myRigidbody.position + (inputVelocity));
         myDebugText.text = "Position: " + myRigidbody.position.y;
         myDebugText.text += "\nInputDir: " + inputVelocity;
+        myDebugText.text += "\nTime Since Collision: " + (groundCollisionTime - Time.realtimeSinceStartup);
 
         if (Input.GetKeyDown(KeyCode.L))
         {
             Debug.Log(this.transform.position);
         }
+
     }
 
     void ProcessPhysics()
@@ -114,6 +150,7 @@ public class Player : MonoBehaviour, CollisionCallable
         {
             if (contacts[i].thisCollider != null && contacts[i].point.y < myRigidbody.position.y - 0.5) {
                 isGrounded = true;
+                groundCollisionTime = Time.realtimeSinceStartup;
             }
             
         }
@@ -128,6 +165,7 @@ public class Player : MonoBehaviour, CollisionCallable
             if (contacts[i].thisCollider != null && contacts[i].point.y < myRigidbody.position.y - 0.5)
             {
                 isGrounded = true;
+                groundCollisionTime = Time.realtimeSinceStartup;
             }
 
         }
