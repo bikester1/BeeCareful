@@ -138,8 +138,16 @@ public class Bee : Entity
             return;
         }
 
-        GameObject flower = FindNearstOfType("Plant");
+        GameObject closestHive = FindNearstOfType("Hive");
+        if (closestHive != null && pollinationCount == maxPollinationCount)
+        {
+            behaviorType = 2;
+            targetObject = closestHive;
+            target = closestHive.transform.position;
+            return;
+        }
 
+        GameObject flower = FindNearstOfType("Plant");
         if (flower != null && Vector3.Distance(flower.transform.position, transform.position) < detectionRadius)
         {
             behaviorType = 2;
