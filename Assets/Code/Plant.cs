@@ -28,20 +28,22 @@ public class Plant : MonoBehaviour
         {
             if (isPollinated)
             {
-                Debug.Log("Already pollinated");
                 currentBee.changeBehaviorType(1);
+                currentBee.AddPlantToMemory(this);
+                inRange = false;
             } else
             {
                 pollinationTimer += Time.deltaTime;
                 if (pollinationTimer >= timeToPollinate)
                 {
-                    Debug.Log("Pollinated and switched behavior");
                     isPollinated = true;
                     currentBee.changeBehaviorType(1);
+                    currentBee.AddPlantToMemory(this);
+                    inRange = false;
                     currentBee.pollinated();
                 }
             }
-            currentBee.AddPlantToMemory(this);
+
         }
 
         if (cooldownTimer>=cooldown)

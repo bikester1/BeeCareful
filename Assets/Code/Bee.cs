@@ -76,7 +76,6 @@ public class Bee : Entity
         {
             case 1: //Looking for target
                 LookForTarget();
-                Debug.Log("Looking for target");
                 break;
             case 2: //Bee finds plant
                 MoveToTarget();
@@ -98,19 +97,20 @@ public class Bee : Entity
                 break;
         }
 
-        if (memory.Count > 0 && Time.realtimeSinceStartup - memoryTimes.Peek() < beeForgetTime)
+        if (memory.Count > 0 && Time.realtimeSinceStartup - memoryTimes.Peek() > beeForgetTime)
         {
+            Debug.Log(Time.realtimeSinceStartup);
             memory.Dequeue();
             memoryTimes.Dequeue();
         }
         Debug.DrawLine(transform.position, targetObject.transform.position);
+        Debug.DrawLine(target, targetObject.transform.position);
     }
 
     private void MoveToRandom()
     {
         targetTimer += Time.deltaTime;
 
-        Debug.Log("Timer: " + targetTimer);
         if(targetTimer > maxRandTime)
         {
             LookForTarget();
@@ -144,7 +144,6 @@ public class Bee : Entity
         float distanceToFlower = Vector3.Distance(flower.transform.position, transform.position);
         if (distanceToFlower < detectionRadius)
         {
-            Debug.Log("Changed behavior to MOVE TO TARGET");
             behaviorType = 2;
             targetObject = flower;
             target = flower.transform.position + (Vector3.up * 2);
@@ -157,7 +156,6 @@ public class Bee : Entity
 
     void RandomTarget ()
     {
-        Debug.Log("new random target");
         float myX = transform.position.x;
         float myZ = transform.position.z;
 
@@ -214,15 +212,12 @@ public class Bee : Entity
         tempSwayData.y = Mathf.Sin(Time.realtimeSinceStartup * verticalSwaySpeed + randomOffset) * verticalHoverAmplitude;
         beeRigidBody.velocity = tempSwayData;
 
-        Debug.Log("Bee Stuff" + targetObject.GetComponent<Transform>().position);
-
         targetObject.GetComponent<Plant>().AssignBee(this);
         targetObject.GetComponent<Plant>().inRange = true;
     }
 
     public void changeBehaviorType(int x)
     {
-        Debug.Log("Behavior switched");
         behaviorType = x;
     }
 
@@ -250,6 +245,7 @@ public class Bee : Entity
         foreach (GameObject obj in objects)
         {
             tempDistance = Vector3.Distance(obj.transform.position, transform.position);
+            Debug.Log(memory.Count);
             Debug.Log(memory.Contains(obj.GetComponent<Plant>()));
             if (tempDistance < leastDistance && !memory.Contains(obj.GetComponent<Plant>()))
             {
@@ -268,9 +264,8 @@ public class Bee : Entity
 
     public void AddPlantToMemory(Plant p)
     {
+        Debug.Log("Enqueue" + p);
         memory.Enqueue(p);
         memoryTimes.Enqueue(Time.realtimeSinceStartup);
-
-        
     }
 }
