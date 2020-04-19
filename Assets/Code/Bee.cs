@@ -2,9 +2,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
-public class Bee : Entity
+public class Bee : Entity, Debuggable
 {
 
     //General
@@ -14,6 +15,7 @@ public class Bee : Entity
     public float detectionRadius;
 
     //Bee memory
+    [SerializeField]
     private Queue<Plant> memory;
     private Queue<float> memoryTimes;
     public float beeForgetTime;
@@ -274,5 +276,13 @@ public class Bee : Entity
         Debug.Log("Enqueue" + p);
         memory.Enqueue(p);
         memoryTimes.Enqueue(Time.realtimeSinceStartup);
+    }
+
+    public string GetDebugInfo()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.Append("Bee Object:" + this.GetHashCode());
+        sb.Append("\nNext Memory Forgotten:" + (memoryTimes.Count > 0 ? beeForgetTime - (Time.realtimeSinceStartup - memoryTimes.Peek()) : -1));
+        return sb.ToString();
     }
 }

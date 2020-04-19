@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using Assets.Code;
+using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
-public class Plant : MonoBehaviour
+public class Plant : MonoBehaviour, Debuggable
 {
 
     public bool isPollinated;
@@ -37,6 +39,7 @@ public class Plant : MonoBehaviour
                 if (pollinationTimer >= timeToPollinate)
                 {
                     isPollinated = true;
+                    pollinationTimer = 0;
                     currentBee.changeBehaviorType(1);
                     currentBee.AddPlantToMemory(this);
                     inRange = false;
@@ -46,15 +49,27 @@ public class Plant : MonoBehaviour
 
         }
 
-        if (cooldownTimer>=cooldown)
+        if (cooldownTimer >= cooldown)
         {
             isPollinated = false;
+            cooldownTimer = 0;
         }
-        cooldownTimer += Time.deltaTime;
+        if(!isPollinated)cooldownTimer += Time.deltaTime;
     }
 
     public void AssignBee(Bee x)
     {
         currentBee = x;
+    }
+
+    public string GetDebugInfo()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.Append("plant Object:" + this.GetHashCode());
+        sb.Append("\nPollinated:" + isPollinated);
+        sb.Append("\nIn Range:" + inRange);
+        sb.Append("\nTime To Depollinate:" + (cooldown - cooldownTimer));
+        sb.Append("\nTime To Pollinate:" + (timeToPollinate - pollinationTimer));
+        return sb.ToString();
     }
 }

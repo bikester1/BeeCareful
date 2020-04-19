@@ -494,7 +494,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  jumpHeight: 1
+  jumpHeight: 1.5
   jumpForgiveness: 0.075
   myDebugText: {fileID: 1225833354}
   debugMode: 1
@@ -847,7 +847,6 @@ GameObject:
   - component: {fileID: 5704219557913612613}
   - component: {fileID: 5813845512680493511}
   - component: {fileID: 624062255}
-  - component: {fileID: 624062256}
   m_Layer: 0
   m_Name: Model
   m_TagString: Player
@@ -942,7 +941,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58330ba8ff67d4e4087df0d6accd570b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  calledObject: {fileID: 9088171147279525782}
+  calledObject: {fileID: 2198464496930876721}
 --- !u!54 &624062255
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -959,19 +958,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &624062256
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4595348877752076379}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58330ba8ff67d4e4087df0d6accd570b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  calledObject: {fileID: 9088171147279525782}
 --- !u!1 &5345332260750192637
 GameObject:
   m_ObjectHideFlags: 0

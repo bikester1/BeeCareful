@@ -122,10 +122,10 @@ public class Player : MonoBehaviour, CollisionCallable
         myRigidbody.velocity = new Vector3(inputVelocity.x, myRigidbody.velocity.y + (inputVelocity.y * jumpHeight), inputVelocity.z);
 
 
-        if (debugMode) Debug.DrawLine(myRigidbody.position, myRigidbody.position + (inputVelocity));
-        myDebugText.text = "Position: " + myRigidbody.position.y;
-        myDebugText.text += "\nInputDir: " + inputVelocity;
-        myDebugText.text += "\nTime Since Collision: " + (groundCollisionTime - Time.realtimeSinceStartup);
+        // if (debugMode) Debug.DrawLine(myRigidbody.position, myRigidbody.position + (inputVelocity));
+        // myDebugText.text = "Position: " + myRigidbody.position.y;
+        // myDebugText.text += "\nInputDir: " + inputVelocity;
+        // myDebugText.text += "\nTime Since Collision: " + (groundCollisionTime - Time.realtimeSinceStartup);
 
         if (Input.GetKeyDown(KeyCode.L))
         {
