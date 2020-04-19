@@ -50,6 +50,7 @@ public class Plant : MonoBehaviour
         {
             isPollinated = false;
         }
+        cooldownTimer += Time.deltaTime;
     }
 
     public void AssignBee(Bee x)
