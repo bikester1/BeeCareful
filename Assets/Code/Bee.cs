@@ -62,7 +62,7 @@ public class Bee : Entity
 
     void Update()
     {
-
+        
         //switch statement calling type of behavior
         switch (behaviorType)
         {
@@ -195,6 +195,7 @@ public class Bee : Entity
         tempSwayData.z = Mathf.Cos(Time.realtimeSinceStartup * hoverSidewaysSpeed + randomOffset) * sidewaysHoverAmplitude;
         tempSwayData.y = Mathf.Sin(Time.realtimeSinceStartup * verticalSwaySpeed + randomOffset) * verticalHoverAmplitude;
         beeRigidBody.velocity = tempSwayData;
+        Debug.Log("Bee Stuff" + targetObject.GetComponent<Transform>().position);
     }
 
     public void changeBehaviorType(int x)
