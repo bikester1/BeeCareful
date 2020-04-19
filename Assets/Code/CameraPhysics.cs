@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Security.AccessControl;
 using UnityEngine;
+using UnityEngine.Diagnostics;
 
 public class CameraPhysics : MonoBehaviour
 {
@@ -66,6 +67,7 @@ public class CameraPhysics : MonoBehaviour
         this.transform.position = targetRigidbody.position + Quaternion.Euler(position.y, position.x, 0) * new Vector3(0, 0, -position.z);
         this.transform.LookAt(targetRigidbody.position, Vector3.up);
 
+        if (placable == null) placing = false;
         if (placing) UpdatePlant();
     }
 

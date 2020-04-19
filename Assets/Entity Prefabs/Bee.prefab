@@ -114,11 +114,13 @@ MonoBehaviour:
   forwardSpeed: 3
   detectionRadius: 20
   maxPollinationCount: 3
+  aggroRange: 15
   verticalSwaySpeed: 1
   sidewaysSwaySpeed: 1
   verticalAmplitude: 1
   horizontalAmplitude: 1
-  findNewTarget: 5
+  maxRandTime: 1
+  findNewTarget: 1
   targetRange: 2
   heightDisplacement: 1
   verticalHoverAmplitude: 0.1
