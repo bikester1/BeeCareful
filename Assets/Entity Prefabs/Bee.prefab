@@ -113,6 +113,7 @@ MonoBehaviour:
   beeRigidBody: {fileID: 1537878482982758127}
   forwardSpeed: 3
   detectionRadius: 20
+  beeForgetTime: 90
   maxPollinationCount: 3
   aggroRange: 15
   verticalSwaySpeed: 1

@@ -387,8 +387,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPollinated: 0
   inRange: 0
-  timeToPollinate: 0
-  cooldown: 0
+  timeToPollinate: 5
+  cooldown: 90
   currentBee: {fileID: 0}
 --- !u!1 &1342160513
 GameObject:

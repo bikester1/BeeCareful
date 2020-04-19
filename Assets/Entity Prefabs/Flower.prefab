@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2872999805267505342}
   - component: {fileID: 2872999805267505341}
   - component: {fileID: 2872999805267505340}
-  - component: {fileID: 2872999805267507010}
+  - component: {fileID: 1325281494}
   m_Layer: 0
   m_Name: Flower
   m_TagString: Plant
@@ -26,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2872999805267505337}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.08, z: 20.35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -80,7 +80,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &2872999805267507010
+--- !u!114 &1325281494
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -89,6 +89,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2872999805267505337}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 863ff504b3938c440a93338f20f36684, type: 3}
+  m_Script: {fileID: 11500000, guid: f81d9123dfc314e49a2d9ce8f85443be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPollinated: 0
+  inRange: 0
+  timeToPollinate: 5
+  cooldown: 90
+  currentBee: {fileID: 0}
