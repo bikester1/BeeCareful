@@ -13,7 +13,10 @@ public class Bee : Entity
     private int behaviorType;
     public float detectionRadius;
 
-    
+    //Bee memory
+    private Queue<Plant> memory;
+    private Queue<float> memoryTimes;
+    public float beeForgetTime;
 
     //Used for determining bee's next target
     private bool hasPollinated;
@@ -46,6 +49,7 @@ public class Bee : Entity
     public float hoverVerticalSpeed;
     public float hoverSidewaysSpeed;
     private float randomOffset;
+    Plant targetPlant;
 
     void Start()
     {
@@ -56,8 +60,12 @@ public class Bee : Entity
         randomOffset = UnityEngine.Random.Range(0f,2*Mathf.PI);
         player = GameObject.FindGameObjectWithTag("Player");
 
+        memory = new Queue<Plant>();
+        memoryTimes = new Queue<float>();
+
         //Finds the bee a target
         behaviorType = 1;
+
     }
 
     void Update()
@@ -68,6 +76,7 @@ public class Bee : Entity
         {
             case 1: //Looking for target
                 LookForTarget();
+                Debug.Log("Looking for target");
                 break;
             case 2: //Bee finds plant
                 MoveToTarget();
@@ -88,6 +97,13 @@ public class Bee : Entity
                 MoveToRandom();
                 break;
         }
+
+        if (memory.Count > 0 && Time.realtimeSinceStartup - memoryTimes.Peek() < beeForgetTime)
+        {
+            memory.Dequeue();
+            memoryTimes.Dequeue();
+        }
+        Debug.DrawLine(transform.position, targetObject.transform.position);
     }
 
     private void MoveToRandom()
@@ -124,9 +140,11 @@ public class Bee : Entity
         }
 
         GameObject flower = FindNearstOfType("Plant");
+        
         float distanceToFlower = Vector3.Distance(flower.transform.position, transform.position);
         if (distanceToFlower < detectionRadius)
         {
+            Debug.Log("Changed behavior to MOVE TO TARGET");
             behaviorType = 2;
             targetObject = flower;
             target = flower.transform.position + (Vector3.up * 2);
@@ -195,11 +213,16 @@ public class Bee : Entity
         tempSwayData.z = Mathf.Cos(Time.realtimeSinceStartup * hoverSidewaysSpeed + randomOffset) * sidewaysHoverAmplitude;
         tempSwayData.y = Mathf.Sin(Time.realtimeSinceStartup * verticalSwaySpeed + randomOffset) * verticalHoverAmplitude;
         beeRigidBody.velocity = tempSwayData;
+
         Debug.Log("Bee Stuff" + targetObject.GetComponent<Transform>().position);
+
+        targetObject.GetComponent<Plant>().AssignBee(this);
+        targetObject.GetComponent<Plant>().inRange = true;
     }
 
     public void changeBehaviorType(int x)
     {
+        Debug.Log("Behavior switched");
         behaviorType = x;
     }
 
@@ -224,16 +247,30 @@ public class Bee : Entity
         GameObject closestObject = null;
         float leastDistance = Mathf.Infinity;
         float tempDistance;
-        foreach (GameObject flower in objects)
+        foreach (GameObject obj in objects)
         {
-            tempDistance = Vector3.Distance(flower.transform.position, transform.position);
-            if (tempDistance < leastDistance)
+            tempDistance = Vector3.Distance(obj.transform.position, transform.position);
+            Debug.Log(memory.Contains(obj.GetComponent<Plant>()));
+            if (tempDistance < leastDistance && !memory.Contains(obj.GetComponent<Plant>()))
             {
                 leastDistance = tempDistance;
-                closestObject = flower;
+                closestObject = obj;
             }
         }
 
         return closestObject;
+    }
+
+    public void pollinated()
+    {
+        pollinationCount++;
+    }
+
+    public void AddPlantToMemory(Plant p)
+    {
+        memory.Enqueue(p);
+        memoryTimes.Enqueue(Time.realtimeSinceStartup);
+
+        
     }
 }
