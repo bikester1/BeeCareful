@@ -114,7 +114,6 @@ public class Player : MonoBehaviour, CollisionCallable
         {
             if (contacts[i].thisCollider != null && contacts[i].point.y < myRigidbody.position.y - 0.5) {
                 isGrounded = true;
-                Debug.DrawLine(myRigidbody.position, contacts[i].point, Color.white, 10);
             }
             
         }
@@ -129,7 +128,6 @@ public class Player : MonoBehaviour, CollisionCallable
             if (contacts[i].thisCollider != null && contacts[i].point.y < myRigidbody.position.y - 0.5)
             {
                 isGrounded = true;
-                Debug.DrawLine(myRigidbody.position, contacts[i].point, Color.white, 10);
             }
 
         }

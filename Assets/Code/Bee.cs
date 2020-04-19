@@ -1,4 +1,7 @@
 ﻿using Assets.Code;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Bee : Entity
@@ -9,6 +12,7 @@ public class Bee : Entity
     public float forwardSpeed;
     private int behaviorType;
     public float detectionRadius;
+
     
 
     //Used for determining bee's next target
@@ -16,6 +20,9 @@ public class Bee : Entity
     public int maxPollinationCount;
     private int pollinationCount;
     private Vector3 target;
+    private GameObject targetObject;
+    private GameObject player;
+    public float aggroRange;
 
     //Configures how much bee moves around.
     public float verticalSwaySpeed; //How fast bee sways up and down
@@ -26,6 +33,7 @@ public class Bee : Entity
 
     //Needed for Random Movement
     private float targetTimer;
+    public float maxRandTime;
     public int findNewTarget;
 
     //Bee close to flower
@@ -45,8 +53,8 @@ public class Bee : Entity
         hasPollinated = false;
         pollinationCount = 0;
         tempSwayData = Vector3.zero;
-        randomOffset = Random.Range(0f,2*Mathf.PI);
-
+        randomOffset = UnityEngine.Random.Range(0f,2*Mathf.PI);
+        player = GameObject.FindGameObjectWithTag("Player");
 
         //Finds the bee a target
         behaviorType = 1;
@@ -62,7 +70,6 @@ public class Bee : Entity
                 LookForTarget();
                 break;
             case 2: //Bee finds plant
-                target = findTargetPosition();
                 MoveToTarget();
                 break;
 
@@ -73,67 +80,71 @@ public class Bee : Entity
             case 4:
                 Hover();
                 break;
+            case 5://Attacking Player
+                AttackPlayer();
+                LookForTarget();
+                break;
+            case 6://random target
+                MoveToRandom();
+                break;
         }
     }
 
-    //Determines bee's target
-    Vector3 findTargetPosition()
+    private void MoveToRandom()
     {
-        //Bee can pollinate only so many times before it must return to hive.
-        if (pollinationCount < maxPollinationCount)
+        targetTimer += Time.deltaTime;
+
+        Debug.Log("Timer: " + targetTimer);
+        if(targetTimer > maxRandTime)
         {
-            GameObject[] flowers = GameObject.FindGameObjectsWithTag("Plant");
-            GameObject closestFlower = null;
-            float leastDistance = Mathf.Infinity;
-            float tempDistance;
-            foreach(GameObject flower in flowers)
-            {
-                tempDistance = Vector3.Distance(flower.transform.position, transform.position);
-                if (tempDistance < leastDistance)
-                {
-                    leastDistance = tempDistance;
-                    closestFlower = flower;
-                }
-            }
-
-
-            return closestFlower.transform.position + Vector3.up * heightDisplacement;
-
-
-        } else
-        {
-            return GameObject.Find("Hive").transform.position;
+            LookForTarget();
+            targetTimer = 0;
         }
-        
+
+        beeRigidBody.transform.LookAt(target);
+        beeRigidBody.velocity = transform.forward.normalized * forwardSpeed;
+        tempSwayData.x = Mathf.Cos(Time.realtimeSinceStartup * sidewaysSwaySpeed * randomOffset) * horizontalAmplitude;
+        tempSwayData.y = Mathf.Sin(Time.realtimeSinceStartup * verticalSwaySpeed * randomOffset) * verticalAmplitude;
+        beeRigidBody.velocity += tempSwayData;
     }
 
+
+    // Only call this function when you actually want a new target
+    // for current target use Vec3 target
     void LookForTarget()
     {
-        Debug.Log(Vector3.Distance(findTargetPosition(), transform.position));
-        if (Vector3.Distance(findTargetPosition(), transform.position) < detectionRadius)
+
+        float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
+        if (distanceToPlayer < aggroRange)
         {
-            Debug.Log("found target");
+            targetObject = player;
+            target = player.transform.transform.position;
+            behaviorType = 5;
+            return;
+        }
+
+        GameObject flower = FindNearstOfType("Plant");
+        float distanceToFlower = Vector3.Distance(flower.transform.position, transform.position);
+        if (distanceToFlower < detectionRadius)
+        {
             behaviorType = 2;
-            findTargetPosition();
+            targetObject = flower;
+            target = flower.transform.position + (Vector3.up * 2);
         } else
         {
-            targetTimer += Time.deltaTime;
-            if (targetTimer >= findNewTarget) {
-                RandomTarget();
-                targetTimer = 0;
-            }
-            MoveToTarget();
+            RandomTarget();
+            behaviorType = 6;// random target
         }
     }
 
     void RandomTarget ()
     {
         Debug.Log("new random target");
-        float myX = gameObject.transform.position.x;
-        float myZ = gameObject.transform.position.z;
+        float myX = transform.position.x;
+        float myZ = transform.position.z;
 
-        float xPos = myX + Random.Range(myX - 50, myX + 50);
-        float zPos = myZ + Random.Range(myZ - 50, myZ + 50);
+        float xPos = UnityEngine.Random.Range(myX - 50, myX + 50);
+        float zPos = UnityEngine.Random.Range(myZ - 50, myZ + 50);
 
         target = new Vector3(xPos, gameObject.transform.position.y, zPos);
     }
@@ -146,10 +157,19 @@ public class Bee : Entity
         tempSwayData.y = Mathf.Sin(Time.realtimeSinceStartup * verticalSwaySpeed * randomOffset) * verticalAmplitude;
         beeRigidBody.velocity += tempSwayData;
 
-        if (Vector3.Distance(findTargetPosition(), transform.position)<targetRange)
+        if (Vector3.Distance(target, transform.position)<targetRange)
         {
             behaviorType = 3;
         }
+    }
+
+    void AttackPlayer()
+    {
+        beeRigidBody.transform.LookAt(target);
+        beeRigidBody.velocity = transform.forward.normalized * forwardSpeed;
+        tempSwayData.x = Mathf.Cos(Time.realtimeSinceStartup * sidewaysSwaySpeed * randomOffset) * horizontalAmplitude;
+        tempSwayData.y = Mathf.Sin(Time.realtimeSinceStartup * verticalSwaySpeed * randomOffset) * verticalAmplitude;
+        beeRigidBody.velocity += tempSwayData;
     }
 
     void CloseToTarget()
@@ -173,23 +193,37 @@ public class Bee : Entity
         beeRigidBody.velocity = tempSwayData;
     }
 
-<<<<<<< HEAD
     public void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("BeeCollision");
         ContactPoint[] contacts = new ContactPoint[collision.contactCount];
         collision.GetContacts(contacts);
-=======
->>>>>>> 4147037c244b3f42ad37bcc5478d03c08e60aea4
 
         for(int i = 0; i < collision.contactCount; i++)
         {
-            Debug.Log(contacts[i].otherCollider.transform.tag);
             if (contacts[i].otherCollider.transform.tag.Contains("Player"))
             {
-                Debug.Log("Destroy all humans");
                 Destroy(this.gameObject);
+                Destroy(this);
             }
         }
+    }
+
+    public GameObject FindNearstOfType(string type)
+    {
+        GameObject[] objects = GameObject.FindGameObjectsWithTag(type);
+        GameObject closestObject = null;
+        float leastDistance = Mathf.Infinity;
+        float tempDistance;
+        foreach (GameObject flower in objects)
+        {
+            tempDistance = Vector3.Distance(flower.transform.position, transform.position);
+            if (tempDistance < leastDistance)
+            {
+                leastDistance = tempDistance;
+                closestObject = flower;
+            }
+        }
+
+        return closestObject;
     }
 }
