@@ -177,6 +177,7 @@ public class Bee : Entity
 
         if (Vector3.Distance(target, transform.position)<targetRange)
         {
+            Debug.Log("SWITCHED TO HOVER");
             behaviorType = 3;
         }
     }
