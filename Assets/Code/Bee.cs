@@ -78,7 +78,24 @@ public class Bee : Entity
         //Bee can pollinate only so many times before it must return to hive.
         if (pollinationCount < maxPollinationCount)
         {
-            return GameObject.FindGameObjectWithTag("Plant").transform.position + Vector3.up * heightDisplacement;
+            GameObject[] flowers = GameObject.FindGameObjectsWithTag("Plant");
+            GameObject closestFlower = null;
+            float leastDistance = Mathf.Infinity;
+            float tempDistance;
+            foreach(GameObject flower in flowers)
+            {
+                tempDistance = Vector3.Distance(flower.transform.position, transform.position);
+                if (tempDistance < leastDistance)
+                {
+                    leastDistance = tempDistance;
+                    closestFlower = flower;
+                }
+            }
+
+
+            return closestFlower.transform.position + Vector3.up * heightDisplacement;
+
+
         } else
         {
             return GameObject.Find("Hive").transform.position;
