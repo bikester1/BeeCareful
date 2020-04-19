@@ -88,7 +88,7 @@ public class Bee : Entity, Debuggable
                 break;
 
             case 4:
-                Hover();
+                HoverOverPlant();
                 break;
             case 5://Attacking Player
                 AttackPlayer();
@@ -214,15 +214,23 @@ public class Bee : Entity, Debuggable
         }
     }
 
-    void Hover()
+    void HoverOverPlant()
     {
         tempSwayData.x = Mathf.Sin(Time.realtimeSinceStartup * hoverSidewaysSpeed + randomOffset) * sidewaysHoverAmplitude;
         tempSwayData.z = Mathf.Cos(Time.realtimeSinceStartup * hoverSidewaysSpeed + randomOffset) * sidewaysHoverAmplitude;
         tempSwayData.y = Mathf.Sin(Time.realtimeSinceStartup * verticalSwaySpeed + randomOffset) * verticalHoverAmplitude;
         beeRigidBody.velocity = tempSwayData;
 
-        targetObject.GetComponent<Plant>().AssignBee(this);
-        targetObject.GetComponent<Plant>().inRange = true;
+        if (!targetObject.GetComponent<Plant>().occupied)
+        {
+            targetObject.GetComponent<Plant>().AssignBee(this);
+            targetObject.GetComponent<Plant>().inRange = true;
+            targetObject.GetComponent<Plant>().occupied = true;
+
+        }else
+        {
+            behaviorType = 1;
+        }
     }
 
     public void changeBehaviorType(int x)
@@ -283,6 +291,7 @@ public class Bee : Entity, Debuggable
         StringBuilder sb = new StringBuilder();
         sb.Append("Bee Object:" + this.GetHashCode());
         sb.Append("\nNext Memory Forgotten:" + (memoryTimes.Count > 0 ? beeForgetTime - (Time.realtimeSinceStartup - memoryTimes.Peek()) : -1));
+        sb.Append("\nTarget Timer" + (maxRandTime - targetTimer));
         return sb.ToString();
     }
 }

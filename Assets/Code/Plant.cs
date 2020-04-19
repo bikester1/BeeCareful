@@ -14,6 +14,7 @@ public class Plant : MonoBehaviour, Debuggable
     public int cooldown;
     private float cooldownTimer;
     public Bee currentBee; //PASS CLOSEST BEE TO PLANT
+    public bool occupied;
 
 
     // Start is called before the first frame update
@@ -21,6 +22,7 @@ public class Plant : MonoBehaviour, Debuggable
     {
         inRange = false;
         isPollinated = false;
+        occupied = false;
     }
 
     // Update is called once per frame
@@ -30,6 +32,7 @@ public class Plant : MonoBehaviour, Debuggable
         {
             if (isPollinated)
             {
+                // Bee finds out no necture
                 currentBee.changeBehaviorType(1);
                 currentBee.AddPlantToMemory(this);
                 inRange = false;
@@ -38,7 +41,9 @@ public class Plant : MonoBehaviour, Debuggable
                 pollinationTimer += Time.deltaTime;
                 if (pollinationTimer >= timeToPollinate)
                 {
+                    // be finished getting necture
                     isPollinated = true;
+                    occupied = false;
                     pollinationTimer = 0;
                     currentBee.changeBehaviorType(1);
                     currentBee.AddPlantToMemory(this);
@@ -54,7 +59,7 @@ public class Plant : MonoBehaviour, Debuggable
             isPollinated = false;
             cooldownTimer = 0;
         }
-        if(!isPollinated)cooldownTimer += Time.deltaTime;
+        if(isPollinated)cooldownTimer += Time.deltaTime;
     }
 
     public void AssignBee(Bee x)

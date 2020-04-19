@@ -120,7 +120,7 @@ MonoBehaviour:
   sidewaysSwaySpeed: 1
   verticalAmplitude: 1
   horizontalAmplitude: 1
-  maxRandTime: 1
+  maxRandTime: 3
   findNewTarget: 1
   targetRange: 2
   heightDisplacement: 1
