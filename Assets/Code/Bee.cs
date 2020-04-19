@@ -29,7 +29,13 @@ public class Bee : Entity
 
     //Bee close to flower
     public float targetRange;
-    public Vector3 heightDisplacement; //Height above plant bee should hover
+    public float heightDisplacement; //Height above plant bee should hover
+
+    //Hover Stuff
+    public float verticalHoverAmplitude;
+    public float sidewaysHoverAmplitude;
+    public float hoverVerticalSpeed;
+    public float hoverSidewaysSpeed;
 
     void Start()
     {
@@ -60,8 +66,8 @@ public class Bee : Entity
                 CloseToTarget();
                 break;
 
-            case 4: //Bee returns to hive
-
+            case 4:
+                Hover();
                 break;
         }
     }
@@ -72,7 +78,7 @@ public class Bee : Entity
         //Bee can pollinate only so many times before it must return to hive.
         if (pollinationCount < maxPollinationCount)
         {
-            return GameObject.FindGameObjectWithTag("Plant").transform.position;
+            return GameObject.FindGameObjectWithTag("Plant").transform.position + Vector3.up * heightDisplacement;
         } else
         {
             return GameObject.Find("Hive").transform.position;
@@ -115,8 +121,8 @@ public class Bee : Entity
     {
         beeRigidBody.transform.LookAt(target);
         beeRigidBody.velocity = transform.forward.normalized * forwardSpeed;
-        tempSwayData.x = Mathf.Cos(Time.realtimeSinceStartup * sidewaysSwaySpeed) * verticalAmplitude;
-        tempSwayData.y = Mathf.Sin(Time.realtimeSinceStartup * verticalSwaySpeed) * horizontalAmplitude;
+        tempSwayData.x = Mathf.Cos(Time.realtimeSinceStartup * sidewaysSwaySpeed) * horizontalAmplitude;
+        tempSwayData.y = Mathf.Sin(Time.realtimeSinceStartup * verticalSwaySpeed) * verticalAmplitude;
         beeRigidBody.velocity += tempSwayData;
 
         if (Vector3.Distance(findTargetPosition(), transform.position)<targetRange)
@@ -127,9 +133,25 @@ public class Bee : Entity
 
     void CloseToTarget()
     {
-        tempSwayData.x = Mathf.Cos(Time.realtimeSinceStartup * sidewaysSwaySpeed) * verticalAmplitude;
-        tempSwayData.y = Mathf.Sin(Time.realtimeSinceStartup * verticalSwaySpeed) * horizontalAmplitude;
+        beeRigidBody.transform.LookAt(target);
+        beeRigidBody.velocity = transform.forward.normalized * forwardSpeed;
+        tempSwayData.y = Mathf.Sin(Time.realtimeSinceStartup * verticalSwaySpeed) * verticalAmplitude;
         beeRigidBody.velocity += tempSwayData;
+        float upperX = target.x + .1f;
+        float lowerX = target.x - .1f;
+        float upperZ = target.z + .1f;
+        float lowerZ = target.z - .1f;
+        if (transform.position.x <= upperX && transform.position.x >= lowerX && transform.position.z <= upperZ && transform.position.z >= lowerZ) behaviorType = 4;
     }
+
+    void Hover()
+    {
+        tempSwayData.x = Mathf.Sin(Time.realtimeSinceStartup * hoverSidewaysSpeed) * sidewaysHoverAmplitude;
+        tempSwayData.z = Mathf.Cos(Time.realtimeSinceStartup * hoverSidewaysSpeed) * sidewaysHoverAmplitude;
+        tempSwayData.y = Mathf.Sin(Time.realtimeSinceStartup * verticalSwaySpeed) * verticalHoverAmplitude;
+        beeRigidBody.velocity = tempSwayData;
+    }
+
+    
 
 }

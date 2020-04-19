@@ -116,11 +116,15 @@ MonoBehaviour:
   maxPollinationCount: 3
   verticalSwaySpeed: 1
   sidewaysSwaySpeed: 1
-  verticalAmplitude: 0.75
-  horizontalAmplitude: 0.75
+  verticalAmplitude: 1
+  horizontalAmplitude: 1
   findNewTarget: 5
-  targetRange: 1
-  heightDisplacement: {x: 0, y: 1, z: 0}
+  targetRange: 2
+  heightDisplacement: 1
+  verticalHoverAmplitude: 0.1
+  sidewaysHoverAmplitude: 0.1
+  hoverVerticalSpeed: 1
+  hoverSidewaysSpeed: 1
 --- !u!135 &440573833
 SphereCollider:
   m_ObjectHideFlags: 0
