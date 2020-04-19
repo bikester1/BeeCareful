@@ -103,8 +103,7 @@ public class Bee : Entity
             memory.Dequeue();
             memoryTimes.Dequeue();
         }
-        Debug.DrawLine(transform.position, targetObject.transform.position);
-        Debug.DrawLine(target, targetObject.transform.position);
+        Debug.DrawLine(transform.position, target);
     }
 
     private void MoveToRandom()
@@ -140,9 +139,8 @@ public class Bee : Entity
         }
 
         GameObject flower = FindNearstOfType("Plant");
-        
-        float distanceToFlower = Vector3.Distance(flower.transform.position, transform.position);
-        if (distanceToFlower < detectionRadius)
+
+        if (flower != null && Vector3.Distance(flower.transform.position, transform.position) < detectionRadius)
         {
             behaviorType = 2;
             targetObject = flower;
