@@ -101,7 +101,6 @@ public class Bee : Entity, Debuggable
 
         if (memory.Count > 0 && Time.realtimeSinceStartup - memoryTimes.Peek() > beeForgetTime)
         {
-            Debug.Log(Time.realtimeSinceStartup);
             memory.Dequeue();
             memoryTimes.Dequeue();
         }
@@ -183,7 +182,6 @@ public class Bee : Entity, Debuggable
 
         if (Vector3.Distance(target, transform.position)<targetRange)
         {
-            Debug.Log("SWITCHED TO HOVER");
             behaviorType = 3;
         }
     }
@@ -221,14 +219,15 @@ public class Bee : Entity, Debuggable
         tempSwayData.y = Mathf.Sin(Time.realtimeSinceStartup * verticalSwaySpeed + randomOffset) * verticalHoverAmplitude;
         beeRigidBody.velocity = tempSwayData;
 
-        if (!targetObject.GetComponent<Plant>().occupied)
+        if (!targetObject.GetComponent<Plant>().occupied || targetObject.GetComponent<Plant>().currentBee == this)
         {
             targetObject.GetComponent<Plant>().AssignBee(this);
-            targetObject.GetComponent<Plant>().inRange = true;
+            targetObject.GetComponent<Plant>().beeInRange = true;
             targetObject.GetComponent<Plant>().occupied = true;
 
         }else
         {
+            AddPlantToMemory(targetObject.GetComponent<Plant>());
             behaviorType = 1;
         }
     }
@@ -262,8 +261,6 @@ public class Bee : Entity, Debuggable
         foreach (GameObject obj in objects)
         {
             tempDistance = Vector3.Distance(obj.transform.position, transform.position);
-            Debug.Log(memory.Count);
-            Debug.Log(memory.Contains(obj.GetComponent<Plant>()));
             if (tempDistance < leastDistance && !memory.Contains(obj.GetComponent<Plant>()))
             {
                 leastDistance = tempDistance;
@@ -281,7 +278,6 @@ public class Bee : Entity, Debuggable
 
     public void AddPlantToMemory(Plant p)
     {
-        Debug.Log("Enqueue" + p);
         memory.Enqueue(p);
         memoryTimes.Enqueue(Time.realtimeSinceStartup);
     }
@@ -292,6 +288,7 @@ public class Bee : Entity, Debuggable
         sb.Append("Bee Object:" + this.GetHashCode());
         sb.Append("\nNext Memory Forgotten:" + (memoryTimes.Count > 0 ? beeForgetTime - (Time.realtimeSinceStartup - memoryTimes.Peek()) : -1));
         sb.Append("\nTarget Timer" + (maxRandTime - targetTimer));
+        sb.Append("\nBehaviour State: " + behaviorType);
         return sb.ToString();
     }
 }

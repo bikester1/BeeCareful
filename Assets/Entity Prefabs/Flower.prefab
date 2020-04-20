@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 2872999805267505342}
   - component: {fileID: 2872999805267505341}
   - component: {fileID: 2872999805267505340}
-  - component: {fileID: 1325281494}
   - component: {fileID: 6286678613508963489}
+  - component: {fileID: 6427794444830379500}
   m_Layer: 0
   m_Name: Flower
   m_TagString: Plant
@@ -30,7 +30,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.08, z: 20.35}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 232208749166929426}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -41,7 +42,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2872999805267505337}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 0}
 --- !u!23 &2872999805267505340
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -81,23 +82,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &1325281494
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2872999805267505337}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f81d9123dfc314e49a2d9ce8f85443be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isPollinated: 0
-  inRange: 0
-  timeToPollinate: 5
-  cooldown: 90
-  currentBee: {fileID: 0}
 --- !u!135 &6286678613508963489
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -111,3 +95,119 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6427794444830379500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2872999805267505337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f81d9123dfc314e49a2d9ce8f85443be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPollinated: 0
+  beeInRange: 0
+  timeToPollinate: 5
+  cooldown: 20
+  currentBee: {fileID: 0}
+  occupied: 0
+  saplingAge: 1
+  maturityAge: 30
+  seedHydrationRequired: 1
+  saplingHydrationRequired: 1
+  matureHydrationRequired: 1
+  seedColor: {r: 0.5161979, g: 0.754717, b: 0.6958101, a: 0}
+  saplingColor: {r: 0.21226418, g: 1, b: 0.3784272, a: 0}
+  matureColor: {r: 0.14554203, g: 0.4528302, b: 0.13456745, a: 0}
+--- !u!1001 &5062692966553652488
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2872999805267505342}
+    m_Modifications:
+    - target: {fileID: -4216859302048453862, guid: 008b1b02466e2ee4594ef8d2417f54db,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 008b1b02466e2ee4594ef8d2417f54db,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 008b1b02466e2ee4594ef8d2417f54db,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 008b1b02466e2ee4594ef8d2417f54db,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 008b1b02466e2ee4594ef8d2417f54db,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.98023665
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 008b1b02466e2ee4594ef8d2417f54db,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 008b1b02466e2ee4594ef8d2417f54db,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.1978286
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 008b1b02466e2ee4594ef8d2417f54db,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 008b1b02466e2ee4594ef8d2417f54db,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 008b1b02466e2ee4594ef8d2417f54db,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 157.18
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 008b1b02466e2ee4594ef8d2417f54db,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 008b1b02466e2ee4594ef8d2417f54db,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 008b1b02466e2ee4594ef8d2417f54db,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 008b1b02466e2ee4594ef8d2417f54db,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 008b1b02466e2ee4594ef8d2417f54db,
+        type: 3}
+      propertyPath: m_Name
+      value: Daisy_01
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 008b1b02466e2ee4594ef8d2417f54db, type: 3}
+--- !u!4 &232208749166929426 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 008b1b02466e2ee4594ef8d2417f54db,
+    type: 3}
+  m_PrefabInstance: {fileID: 5062692966553652488}
+  m_PrefabAsset: {fileID: 0}

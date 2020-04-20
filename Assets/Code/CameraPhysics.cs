@@ -106,6 +106,7 @@ public class CameraPhysics : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
+            placable.GetComponent<MonoBehaviour>().enabled = true;
             placable = null;
             placing = false;
         }
@@ -113,11 +114,12 @@ public class CameraPhysics : MonoBehaviour
 
     private void placePlant()
     {
+        
         placing = true;
         placementOffset = Vector3.zero;
         placable = Instantiate(prefabManager.flowerBasic);
         placable.GetComponent<Transform>().position = new Vector3(0, -10000, 0);
-        Debug.Log("planting Started");
+        placable.GetComponent<MonoBehaviour>().enabled = false;
     }
 
     private void placeBee()
@@ -126,7 +128,7 @@ public class CameraPhysics : MonoBehaviour
         placementOffset = Vector3.up * 2;
         placable = Instantiate(prefabManager.bee);
         placable.GetComponent<Transform>().position = new Vector3(0, -10000, 0);
-        Debug.Log("planting Started");
+        placable.GetComponent<MonoBehaviour>().enabled = false;
     }
 
     private void FindDebugObject()
@@ -139,7 +141,6 @@ public class CameraPhysics : MonoBehaviour
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
             Debuggable debugObj = hit.transform.GetComponent<Debuggable>();
-            Debug.Log(hit.transform.GetComponent<Plant>());
             if(debugObj != null && Input.GetMouseButton(0))
             {
                 Debug.Log("New Debug Target");
