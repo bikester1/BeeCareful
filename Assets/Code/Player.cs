@@ -122,10 +122,10 @@ public class Player : MonoBehaviour, CollisionCallable
         myRigidbody.velocity = new Vector3(inputVelocity.x, myRigidbody.velocity.y + (inputVelocity.y * jumpHeight), inputVelocity.z);
 
 
-        if (debugMode) Debug.DrawLine(myRigidbody.position, myRigidbody.position + (inputVelocity));
-        myDebugText.text = "Position: " + myRigidbody.position.y;
-        myDebugText.text += "\nInputDir: " + inputVelocity;
-        myDebugText.text += "\nTime Since Collision: " + (groundCollisionTime - Time.realtimeSinceStartup);
+        // if (debugMode) Debug.DrawLine(myRigidbody.position, myRigidbody.position + (inputVelocity));
+        // myDebugText.text = "Position: " + myRigidbody.position.y;
+        // myDebugText.text += "\nInputDir: " + inputVelocity;
+        // myDebugText.text += "\nTime Since Collision: " + (groundCollisionTime - Time.realtimeSinceStartup);
 
         if (Input.GetKeyDown(KeyCode.L))
         {
@@ -144,6 +144,13 @@ public class Player : MonoBehaviour, CollisionCallable
 
     void CollisionCallable.OnCollisionEnter(Collision collision)
     {
+        // Ignore flowers
+        if (collision.gameObject.GetComponent<Plant>() != null)
+        {
+            Physics.IgnoreCollision(collision.collider, myCollider);
+        }
+
+        // Determine if grounded.
         ContactPoint[] contacts = new ContactPoint[collision.contactCount];
         collision.GetContacts(contacts);
         for(int i = 0; i < collision.contactCount; i++)
@@ -158,6 +165,7 @@ public class Player : MonoBehaviour, CollisionCallable
 
     public void OnCollisionStay(Collision collision)
     {
+        // Determine if grounded
         ContactPoint[] contacts = new ContactPoint[collision.contactCount];
         collision.GetContacts(contacts);
         for (int i = 0; i < collision.contactCount; i++)
@@ -173,6 +181,7 @@ public class Player : MonoBehaviour, CollisionCallable
 
     public void OnCollisionExit(Collision collision)
     {
+        // on exit when we are no longer in collision so we cannot be grounded
         List<ContactPoint> contacts = new List<ContactPoint>();
         collision.GetContacts(contacts);
         isGrounded = false;

@@ -9,6 +9,8 @@ TagManager:
   - PrefabManager
   - Plantable
   - Hive
+  - MultiTag
+  - Debugable
   layers:
   - Default
   - TransparentFX

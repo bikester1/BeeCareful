@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using Assets.Code;
+using System.Collections;
 using System.Collections.Generic;
 using System.Security.AccessControl;
 using UnityEngine;
 using UnityEngine.Diagnostics;
+using UnityEngine.UI;
 
 public class CameraPhysics : MonoBehaviour
 {
@@ -25,6 +27,11 @@ public class CameraPhysics : MonoBehaviour
 
     // needed to create prefabs
     private PrefabManager prefabManager;
+
+    // Debug variables
+    private Canvas myCanvas;
+    private Text myDebugText;
+    private Debuggable debugTarget;
  
     // Start is called before the first frame update
     void Start()
@@ -34,6 +41,10 @@ public class CameraPhysics : MonoBehaviour
         targetRigidbody = transform.parent.GetComponentInChildren<Rigidbody>();
         myCam = GetComponent<Camera>();
         prefabManager = GameObject.FindObjectOfType<PrefabManager>();
+
+        // Debug stuff
+        myCanvas = myCam.GetComponentInChildren<Canvas>();
+        myDebugText = myCanvas.GetComponentInChildren<Text>();
     }
 
     // Update is called once per frame
@@ -69,9 +80,15 @@ public class CameraPhysics : MonoBehaviour
 
         if (placable == null) placing = false;
         if (placing) UpdatePlant();
+        else FindDebugObject();
+
+        if(debugTarget != null)
+        {
+            myDebugText.text = debugTarget.GetDebugInfo();
+        }
     }
 
-    void UpdatePlant()
+    private void UpdatePlant()
     {
         Ray ray = myCam.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
         Debug.DrawRay(ray.origin, ray.direction * 10, Color.white);
@@ -89,26 +106,47 @@ public class CameraPhysics : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
+            placable.GetComponent<MonoBehaviour>().enabled = true;
             placable = null;
             placing = false;
         }
     }
 
-    public void placePlant()
+    private void placePlant()
     {
+        
         placing = true;
         placementOffset = Vector3.zero;
         placable = Instantiate(prefabManager.flowerBasic);
         placable.GetComponent<Transform>().position = new Vector3(0, -10000, 0);
-        Debug.Log("planting Started");
+        placable.GetComponent<MonoBehaviour>().enabled = false;
     }
 
-    public void placeBee()
+    private void placeBee()
     {
         placing = true;
         placementOffset = Vector3.up * 2;
         placable = Instantiate(prefabManager.bee);
         placable.GetComponent<Transform>().position = new Vector3(0, -10000, 0);
-        Debug.Log("planting Started");
+        placable.GetComponent<MonoBehaviour>().enabled = false;
+    }
+
+    private void FindDebugObject()
+    {
+        Ray ray = myCam.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
+        Debug.DrawRay(ray.origin, ray.direction * 10, Color.white);
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        {
+            Debuggable debugObj = hit.transform.GetComponent<Debuggable>();
+            if(debugObj != null && Input.GetMouseButton(0))
+            {
+                Debug.Log("New Debug Target");
+                debugTarget = debugObj;
+            }
+
+        }
     }
 }

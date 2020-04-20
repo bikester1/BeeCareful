@@ -2,9 +2,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
-public class Bee : Entity
+public class Bee : Entity, Debuggable
 {
 
     //General
@@ -14,6 +15,7 @@ public class Bee : Entity
     public float detectionRadius;
 
     //Bee memory
+    [SerializeField]
     private Queue<Plant> memory;
     private Queue<float> memoryTimes;
     public float beeForgetTime;
@@ -86,7 +88,7 @@ public class Bee : Entity
                 break;
 
             case 4:
-                Hover();
+                HoverOverPlant();
                 break;
             case 5://Attacking Player
                 AttackPlayer();
@@ -99,7 +101,6 @@ public class Bee : Entity
 
         if (memory.Count > 0 && Time.realtimeSinceStartup - memoryTimes.Peek() > beeForgetTime)
         {
-            Debug.Log(Time.realtimeSinceStartup);
             memory.Dequeue();
             memoryTimes.Dequeue();
         }
@@ -181,7 +182,6 @@ public class Bee : Entity
 
         if (Vector3.Distance(target, transform.position)<targetRange)
         {
-            Debug.Log("SWITCHED TO HOVER");
             behaviorType = 3;
         }
     }
@@ -212,15 +212,24 @@ public class Bee : Entity
         }
     }
 
-    void Hover()
+    void HoverOverPlant()
     {
         tempSwayData.x = Mathf.Sin(Time.realtimeSinceStartup * hoverSidewaysSpeed + randomOffset) * sidewaysHoverAmplitude;
         tempSwayData.z = Mathf.Cos(Time.realtimeSinceStartup * hoverSidewaysSpeed + randomOffset) * sidewaysHoverAmplitude;
         tempSwayData.y = Mathf.Sin(Time.realtimeSinceStartup * verticalSwaySpeed + randomOffset) * verticalHoverAmplitude;
         beeRigidBody.velocity = tempSwayData;
 
-        targetObject.GetComponent<Plant>().AssignBee(this);
-        targetObject.GetComponent<Plant>().inRange = true;
+        if (!targetObject.GetComponent<Plant>().occupied || targetObject.GetComponent<Plant>().currentBee == this)
+        {
+            targetObject.GetComponent<Plant>().AssignBee(this);
+            targetObject.GetComponent<Plant>().beeInRange = true;
+            targetObject.GetComponent<Plant>().occupied = true;
+
+        }else
+        {
+            AddPlantToMemory(targetObject.GetComponent<Plant>());
+            behaviorType = 1;
+        }
     }
 
     public void changeBehaviorType(int x)
@@ -252,8 +261,6 @@ public class Bee : Entity
         foreach (GameObject obj in objects)
         {
             tempDistance = Vector3.Distance(obj.transform.position, transform.position);
-            Debug.Log(memory.Count);
-            Debug.Log(memory.Contains(obj.GetComponent<Plant>()));
             if (tempDistance < leastDistance && !memory.Contains(obj.GetComponent<Plant>()))
             {
                 leastDistance = tempDistance;
@@ -271,8 +278,17 @@ public class Bee : Entity
 
     public void AddPlantToMemory(Plant p)
     {
-        Debug.Log("Enqueue" + p);
         memory.Enqueue(p);
         memoryTimes.Enqueue(Time.realtimeSinceStartup);
+    }
+
+    public string GetDebugInfo()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.Append("Bee Object:" + this.GetHashCode());
+        sb.Append("\nNext Memory Forgotten:" + (memoryTimes.Count > 0 ? beeForgetTime - (Time.realtimeSinceStartup - memoryTimes.Peek()) : -1));
+        sb.Append("\nTarget Timer" + (maxRandTime - targetTimer));
+        sb.Append("\nBehaviour State: " + behaviorType);
+        return sb.ToString();
     }
 }
