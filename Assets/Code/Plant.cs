@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
-using UnityEditor.UI;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class Plant : MonoBehaviour, Debuggable
@@ -108,7 +108,7 @@ public class Plant : MonoBehaviour, Debuggable
                 if (hydration > saplingHydrationRequired) age += Time.deltaTime;
                 break;
             case growthState.Mature:
-
+                UpdateMature();
                 if (hydration > matureHydrationRequired) age += Time.deltaTime;
                 break;
         }
@@ -126,6 +126,12 @@ public class Plant : MonoBehaviour, Debuggable
     {
         GetComponent<Renderer>().material.color = Color.Lerp(saplingColor, matureColor, percentGrown);
         transform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one, percentGrown);
+    }
+
+    
+    private void UpdateMature()
+    {
+
     }
 
     //private float age;
