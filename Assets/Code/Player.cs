@@ -21,6 +21,8 @@ public class Player : MonoBehaviour, CollisionCallable
     public bool debugMode = false;
     private float groundCollisionTime;
 
+    private Inventory myInventory;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +31,7 @@ public class Player : MonoBehaviour, CollisionCallable
         myRigidbody = GetComponentInChildren<Rigidbody>();
         myCanvas = myCam.GetComponentInChildren<Canvas>();
         myDebugText = myCanvas.GetComponentInChildren<Text>();
+        myInventory = myCam.GetComponentInChildren<Inventory>();
     }
 
     // Update is called once per frame
@@ -122,11 +125,6 @@ public class Player : MonoBehaviour, CollisionCallable
         myRigidbody.velocity = new Vector3(inputVelocity.x, myRigidbody.velocity.y + (inputVelocity.y * jumpHeight), inputVelocity.z);
 
 
-        // if (debugMode) Debug.DrawLine(myRigidbody.position, myRigidbody.position + (inputVelocity));
-        // myDebugText.text = "Position: " + myRigidbody.position.y;
-        // myDebugText.text += "\nInputDir: " + inputVelocity;
-        // myDebugText.text += "\nTime Since Collision: " + (groundCollisionTime - Time.realtimeSinceStartup);
-
         if (Input.GetKeyDown(KeyCode.L))
         {
             Debug.Log(this.transform.position);
@@ -150,6 +148,22 @@ public class Player : MonoBehaviour, CollisionCallable
             Physics.IgnoreCollision(collision.collider, myCollider);
         }
 
+        if(collision.gameObject.GetComponent<Item>() != null)
+        {
+            Item item = collision.gameObject.GetComponent<Item>();
+            int slot = myInventory.FirstEmptySlot();
+
+            // inventory full
+            if (slot == -1) 
+            {
+                Physics.IgnoreCollision(collision.collider, myCollider);
+                return; 
+            }
+
+            item.MeshRenderer.enabled = false;
+            myInventory.ItemToSlot(item, slot);
+        }
+
         // Determine if grounded.
         ContactPoint[] contacts = new ContactPoint[collision.contactCount];
         collision.GetContacts(contacts);
@@ -165,6 +179,28 @@ public class Player : MonoBehaviour, CollisionCallable
 
     public void OnCollisionStay(Collision collision)
     {
+        // Ignore flowers
+        if (collision.gameObject.GetComponent<Plant>() != null)
+        {
+            Physics.IgnoreCollision(collision.collider, myCollider);
+        }
+
+        if (collision.gameObject.GetComponent<Item>() != null)
+        {
+            Item item = collision.gameObject.GetComponent<Item>();
+            int slot = myInventory.FirstEmptySlot();
+
+            // inventory full
+            if (slot == -1)
+            {
+                Physics.IgnoreCollision(collision.collider, myCollider);
+                return;
+            }
+
+            item.MeshRenderer.enabled = false;
+            myInventory.ItemToSlot(item, slot);
+        }
+
         // Determine if grounded
         ContactPoint[] contacts = new ContactPoint[collision.contactCount];
         collision.GetContacts(contacts);
