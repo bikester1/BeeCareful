@@ -218,6 +218,7 @@ public class Bee : Entity, Debuggable
         tempSwayData.z = Mathf.Cos(Time.realtimeSinceStartup * hoverSidewaysSpeed + randomOffset) * sidewaysHoverAmplitude;
         tempSwayData.y = Mathf.Sin(Time.realtimeSinceStartup * verticalSwaySpeed + randomOffset) * verticalHoverAmplitude;
         beeRigidBody.velocity = tempSwayData;
+        beeRigidBody.transform.LookAt(target);
 
         if (!targetObject.GetComponent<Plant>().occupied || targetObject.GetComponent<Plant>().currentBee == this)
         {
