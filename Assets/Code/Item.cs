@@ -7,17 +7,14 @@ using UnityEngine;
 
 
 
-public class Item : MonoBehaviour
+public interface Item
 {
+    float LowerBobLimit { get; set; }
+    float UpperBobLimit { get; set; }
+    float Rotation { get; set; }
+    MeshRenderer MeshRenderer { get; set; }
+    Sprite InventoryIcon { get; set; }
 
-    // Bobbing vairable
-    public float lowerBobLimit;
-    public float upperBobLimit;
-    public float rotation;
-
-    // Item stuff
-    public float model;
-    public float inventoryIcon;
-
+    void UseItem();
 }
 
