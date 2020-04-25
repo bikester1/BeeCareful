@@ -4,22 +4,37 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
 
 class Inventory : MonoBehaviour
 {
     private Item[] inventorySlots;
+    public Image[] Slots;
     public int numSlots;
 
+    private Canvas myCanvas;
+    
 
 
     public void Start()
     {
         inventorySlots = new Item[numSlots];
+        myCanvas = GetComponent<Canvas>();
     }
 
     public void Update()
     {
-        
+        for (int i = 0; i < numSlots; i++)
+        {
+            if(inventorySlots[i] == null)continue;
+            if (inventorySlots[i].InstantiatedInventoryIcon == null)
+            {
+                inventorySlots[i].InstantiatedInventoryIcon = Instantiate(inventorySlots[i].InventoryIcon);
+                inventorySlots[i].InstantiatedInventoryIcon.transform.parent = Slots.ElementAt(i).transform;
+                inventorySlots[i].InstantiatedInventoryIcon.transform.localPosition = Vector3.zero;
+            }
+
+        }
     }
 
     public void ClickedSlot(int slotNum)
@@ -35,7 +50,7 @@ class Inventory : MonoBehaviour
 
         for(int i = 0; i < numSlots; i++)
         {
-            if (inventorySlots[i] != null) return i;
+            if (inventorySlots[i] == null) return i;
         }
 
         return -1;

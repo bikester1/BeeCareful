@@ -15,14 +15,19 @@ public class Seed : MonoBehaviour, Item
     [SerializeField]
     private MeshRenderer myMeshRenderer;
     [SerializeField]
-    private Sprite inventoryIcon;
+    private GameObject inventoryIcon;
+    [SerializeField]
+    private GameObject instantiatedInventoryIcon;
 
 
     public float LowerBobLimit { get => lowerBobLimit; set => lowerBobLimit = value; }
     public float UpperBobLimit { get => upperBobLimit; set => upperBobLimit = value; }
     public float Rotation { get => rotation; set => rotation = value; }
     public MeshRenderer MeshRenderer { get => myMeshRenderer; set => myMeshRenderer = value; }
-    public Sprite InventoryIcon { get => inventoryIcon; set => inventoryIcon = value; }
+    public GameObject InventoryIcon { get => inventoryIcon; set => inventoryIcon = value; }
+    public GameObject InstantiatedInventoryIcon { get => instantiatedInventoryIcon; set => instantiatedInventoryIcon = value; }
+
+    private PrefabManager prefabManager;
 
     public void UseItem()
     {
@@ -32,7 +37,8 @@ public class Seed : MonoBehaviour, Item
     // Start is called before the first frame update
     void Start()
     {
-        
+        prefabManager = GameObject.FindObjectOfType<PrefabManager>();
+        inventoryIcon = prefabManager.seedIcon;
     }
 
     // Update is called once per frame

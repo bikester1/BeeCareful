@@ -14,5 +14,7 @@ namespace Assets.Code
         void OnCollisionStay(Collision collision);
 
         void OnCollisionExit(Collision collision);
+
+        void OnTriggerEnter(Collider collider);
     }
 }

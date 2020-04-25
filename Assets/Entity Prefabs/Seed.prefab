@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4192372440045059015}
+  - component: {fileID: 6744219883637725329}
+  - component: {fileID: 1770220173117876276}
   m_Layer: 0
   m_Name: Seed
   m_TagString: Untagged
@@ -31,6 +33,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &6744219883637725329
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6109286777590533979}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.25
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.11, z: 0}
+--- !u!114 &1770220173117876276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6109286777590533979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb745b8a0cdbb65409910ee10b46881d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lowerBobLimit: 0
+  upperBobLimit: 0
+  rotation: 0
+  myMeshRenderer: {fileID: 321414764021052298}
+  inventoryIcon: {fileID: 6425792795406079396, guid: 5ef349c9553b8e3428bd6fe513c03f92,
+    type: 3}
+  instantiatedInventoryIcon: {fileID: 0}
 --- !u!1001 &8027910550725271135
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46,12 +81,12 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 7011e2b1d2bc55a4bb418fd147c1dcf2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.728
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 7011e2b1d2bc55a4bb418fd147c1dcf2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.556
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 7011e2b1d2bc55a4bb418fd147c1dcf2,
         type: 3}
@@ -123,6 +158,12 @@ PrefabInstance:
 --- !u!4 &3031602950306706757 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 7011e2b1d2bc55a4bb418fd147c1dcf2,
+    type: 3}
+  m_PrefabInstance: {fileID: 8027910550725271135}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &321414764021052298 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -1504981713932161579, guid: 7011e2b1d2bc55a4bb418fd147c1dcf2,
     type: 3}
   m_PrefabInstance: {fileID: 8027910550725271135}
   m_PrefabAsset: {fileID: 0}

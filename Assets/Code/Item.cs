@@ -13,7 +13,8 @@ public interface Item
     float UpperBobLimit { get; set; }
     float Rotation { get; set; }
     MeshRenderer MeshRenderer { get; set; }
-    Sprite InventoryIcon { get; set; }
+    GameObject InventoryIcon { get; set; }
+    GameObject InstantiatedInventoryIcon { get; set; }
 
     void UseItem();
 }

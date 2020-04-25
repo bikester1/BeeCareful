@@ -1903,7 +1903,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 8075187265624713614}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -2138,7 +2138,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 7425017932295907425}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -2266,7 +2266,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 8618249531576101082}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -2394,7 +2394,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 2501127164283777203}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -2522,7 +2522,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 4724650791802527029}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -2650,7 +2650,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 5614920955359785610}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -2829,7 +2829,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 7880147074914739245}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -2957,7 +2957,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 4511921448008143953}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -3162,7 +3162,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 8789644499058523513}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -3290,7 +3290,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 4308463974202125797}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -3418,7 +3418,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 443768444497716264}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -3546,7 +3546,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 3765150740699938209}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -3674,7 +3674,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 3538672182463962293}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -3802,7 +3802,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 5434803888257428577}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -3930,7 +3930,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 1198090154385916877}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -4058,7 +4058,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 2997785977113435448}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -4187,7 +4187,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 2834830622667016074}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -4327,7 +4327,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 3309031671969167922}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -4713,7 +4713,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 1259037941291906017}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -4841,7 +4841,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 4902989548056264396}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -4887,7 +4887,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.72, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: [{fileID: 5006512736263786985}]
+  m_Children:
+  - {fileID: 5006512736263786985}
   m_Father: {fileID: 2344287119553974820}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5094,7 +5095,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 8212346762713145639}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -5222,7 +5223,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 6607352129134453904}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -5314,131 +5315,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Plant_1
---- !u!1001 &1507949299
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 443579092968345552}
-    m_Modifications:
-    - target: {fileID: -7429082092374757768, guid: 322c5a1d00720fc4598300abb81028bd,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -7429082092374757768, guid: 322c5a1d00720fc4598300abb81028bd,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -7429082092374757768, guid: 322c5a1d00720fc4598300abb81028bd,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -7429082092374757768, guid: 322c5a1d00720fc4598300abb81028bd,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -7429082092374757768, guid: 322c5a1d00720fc4598300abb81028bd,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -7429082092374757768, guid: 322c5a1d00720fc4598300abb81028bd,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -7429082092374757768, guid: 322c5a1d00720fc4598300abb81028bd,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -7429082092374757768, guid: 322c5a1d00720fc4598300abb81028bd,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -7429082092374757768, guid: 322c5a1d00720fc4598300abb81028bd,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 322c5a1d00720fc4598300abb81028bd,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 322c5a1d00720fc4598300abb81028bd,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.95
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 322c5a1d00720fc4598300abb81028bd,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 322c5a1d00720fc4598300abb81028bd,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 322c5a1d00720fc4598300abb81028bd,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 322c5a1d00720fc4598300abb81028bd,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 322c5a1d00720fc4598300abb81028bd,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 322c5a1d00720fc4598300abb81028bd,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 322c5a1d00720fc4598300abb81028bd,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 322c5a1d00720fc4598300abb81028bd,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 322c5a1d00720fc4598300abb81028bd,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 322c5a1d00720fc4598300abb81028bd,
-        type: 3}
-      propertyPath: m_Name
-      value: BeeKeeperShitTexture
-      objectReference: {fileID: 0}
-    - target: {fileID: 2037446780462727137, guid: 322c5a1d00720fc4598300abb81028bd,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 76b99855e0120b54e9f5ef7fe7972013, type: 2}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 322c5a1d00720fc4598300abb81028bd, type: 3}
---- !u!4 &5006512736263786985 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 322c5a1d00720fc4598300abb81028bd,
-    type: 3}
-  m_PrefabInstance: {fileID: 1507949299}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5405362571155828869
 GameObject:
   m_ObjectHideFlags: 0
@@ -5552,7 +5428,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 1345546275739081299}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -5680,7 +5556,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 410067452865336287}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -5808,7 +5684,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 5992153046271424644}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -5936,7 +5812,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 4963145185967074820}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -6064,7 +5940,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 1381004982225103362}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -6192,7 +6068,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 2112419873682759377}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -6320,7 +6196,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 2249367223031334138}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -6484,7 +6360,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 6068007399087453533}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -6601,7 +6477,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 4348337648258080837}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -6729,7 +6605,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 189332359197015642}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -6970,7 +6846,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 8200488111445081090}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -7098,7 +6974,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 3715433072906146952}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -7226,7 +7102,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 7773399782978163507}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -7354,7 +7230,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 2649108970664206095}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -7482,7 +7358,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 8886003350978325102}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -7497,3 +7373,128 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
+--- !u!1001 &1507949299
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 443579092968345552}
+    m_Modifications:
+    - target: {fileID: -7429082092374757768, guid: 322c5a1d00720fc4598300abb81028bd,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7429082092374757768, guid: 322c5a1d00720fc4598300abb81028bd,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7429082092374757768, guid: 322c5a1d00720fc4598300abb81028bd,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7429082092374757768, guid: 322c5a1d00720fc4598300abb81028bd,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7429082092374757768, guid: 322c5a1d00720fc4598300abb81028bd,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7429082092374757768, guid: 322c5a1d00720fc4598300abb81028bd,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7429082092374757768, guid: 322c5a1d00720fc4598300abb81028bd,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7429082092374757768, guid: 322c5a1d00720fc4598300abb81028bd,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7429082092374757768, guid: 322c5a1d00720fc4598300abb81028bd,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 322c5a1d00720fc4598300abb81028bd,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 322c5a1d00720fc4598300abb81028bd,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.95
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 322c5a1d00720fc4598300abb81028bd,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 322c5a1d00720fc4598300abb81028bd,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 322c5a1d00720fc4598300abb81028bd,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 322c5a1d00720fc4598300abb81028bd,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 322c5a1d00720fc4598300abb81028bd,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 322c5a1d00720fc4598300abb81028bd,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 322c5a1d00720fc4598300abb81028bd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 322c5a1d00720fc4598300abb81028bd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 322c5a1d00720fc4598300abb81028bd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 322c5a1d00720fc4598300abb81028bd,
+        type: 3}
+      propertyPath: m_Name
+      value: BeeKeeperShitTexture
+      objectReference: {fileID: 0}
+    - target: {fileID: 2037446780462727137, guid: 322c5a1d00720fc4598300abb81028bd,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 76b99855e0120b54e9f5ef7fe7972013, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 322c5a1d00720fc4598300abb81028bd, type: 3}
+--- !u!4 &5006512736263786985 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 322c5a1d00720fc4598300abb81028bd,
+    type: 3}
+  m_PrefabInstance: {fileID: 1507949299}
+  m_PrefabAsset: {fileID: 0}
