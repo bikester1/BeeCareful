@@ -101,8 +101,18 @@ public class Player : MonoBehaviour, CollisionCallable
             jumpTimer = 0;
         }
 
+        if (Input.GetKeyDown(KeyCode.I) && myInventory.GetComponent<Canvas>().enabled == false)
+        {
+            myInventory.GetComponent<Canvas>().enabled = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape) && myInventory.GetComponent<Canvas>().enabled == true)
+        {
+            myInventory.GetComponent<Canvas>().enabled = false;
+        }
+
         // jump
-        if(isGrounded && jumped)
+        if (isGrounded && jumped)
         {
             inputDir = Vector3.up;
             jumped = false;
