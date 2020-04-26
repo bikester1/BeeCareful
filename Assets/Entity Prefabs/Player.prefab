@@ -6735,7 +6735,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87be8cd5b6c047c40886a8818fb1e8dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotParent: {fileID: 0}
+  slotParent: {fileID: 7147141508343482078}
   slots: []
   numSlots: 45
 --- !u!1 &7713261664029863815

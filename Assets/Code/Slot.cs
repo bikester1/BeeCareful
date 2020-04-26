@@ -36,18 +36,21 @@ public class Slot : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             if(gameObject.GetComponent<Slot>() != null)
             {
                 Slot hoveredSlot = gameObject.GetComponent<Slot>();
-                Item tempItem = hoveredSlot.item;
+                Item tempItem = this.item;
                 this.item = hoveredSlot.item;
                 hoveredSlot.item = tempItem;
 
                 // Attach icon to new slot
-                hoveredSlot.item.InstantiatedInventoryIcon.transform.parent = hoveredSlot.transform;
-                hoveredSlot.item.InstantiatedInventoryIcon.transform.localPosition = Vector3.zero;
+                if (hoveredSlot.item != null)
+                {
+                    hoveredSlot.item.InstantiatedInventoryIcon.transform.SetParent(hoveredSlot.transform);
+                    hoveredSlot.item.InstantiatedInventoryIcon.transform.localPosition = Vector3.zero;
+                }
 
                 // attach replaced item to new slot
                 if(this.item != null)
                 {
-                    this.item.InstantiatedInventoryIcon.transform.parent = this.transform;
+                    this.item.InstantiatedInventoryIcon.transform.SetParent(this.transform);
                     this.item.InstantiatedInventoryIcon.transform.localPosition = Vector3.zero;
                 }
             }

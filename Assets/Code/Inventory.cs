@@ -21,6 +21,8 @@ public class Inventory : MonoBehaviour
     {
         slots = new Slot[numSlots];
         myCanvas = GetComponent<Canvas>();
+
+        slots = slotParent.GetComponentsInChildren<Slot>();
     }
 
     public void Update()
@@ -31,7 +33,7 @@ public class Inventory : MonoBehaviour
             if (slots[i].item.InstantiatedInventoryIcon == null)
             {
                 slots[i].item.InstantiatedInventoryIcon = Instantiate(slots[i].item.InventoryIcon);
-                slots[i].item.InstantiatedInventoryIcon.transform.parent = slots.ElementAt(i).transform;
+                slots[i].item.InstantiatedInventoryIcon.transform.SetParent(slots.ElementAt(i).transform);
                 slots[i].item.InstantiatedInventoryIcon.transform.localPosition = Vector3.zero;
             }
 
