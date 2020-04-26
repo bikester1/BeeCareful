@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Windows.WebCam;
 
-public class Seed : MonoBehaviour, Item
+public class Seed : Item
 {
 
     [SerializeField]
@@ -20,16 +20,16 @@ public class Seed : MonoBehaviour, Item
     private GameObject instantiatedInventoryIcon;
 
 
-    public float LowerBobLimit { get => lowerBobLimit; set => lowerBobLimit = value; }
-    public float UpperBobLimit { get => upperBobLimit; set => upperBobLimit = value; }
-    public float Rotation { get => rotation; set => rotation = value; }
-    public MeshRenderer MeshRenderer { get => myMeshRenderer; set => myMeshRenderer = value; }
-    public GameObject InventoryIcon { get => inventoryIcon; set => inventoryIcon = value; }
-    public GameObject InstantiatedInventoryIcon { get => instantiatedInventoryIcon; set => instantiatedInventoryIcon = value; }
+    public override float LowerBobLimit { get => lowerBobLimit; set => lowerBobLimit = value; }
+    public override float UpperBobLimit { get => upperBobLimit; set => upperBobLimit = value; }
+    public override float Rotation { get => rotation; set => rotation = value; }
+    public override MeshRenderer MeshRenderer { get => myMeshRenderer; set => myMeshRenderer = value; }
+    public override GameObject InventoryIcon { get => inventoryIcon; set => inventoryIcon = value; }
+    public override GameObject InstantiatedInventoryIcon { get => instantiatedInventoryIcon; set => instantiatedInventoryIcon = value; }
 
     private PrefabManager prefabManager;
 
-    public void UseItem()
+    public override void UseItem()
     {
         throw new System.NotImplementedException();
     }

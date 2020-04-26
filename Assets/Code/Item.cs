@@ -7,15 +7,15 @@ using UnityEngine;
 
 
 
-public interface Item
+public abstract class Item : MonoBehaviour
 {
-    float LowerBobLimit { get; set; }
-    float UpperBobLimit { get; set; }
-    float Rotation { get; set; }
-    MeshRenderer MeshRenderer { get; set; }
-    GameObject InventoryIcon { get; set; }
-    GameObject InstantiatedInventoryIcon { get; set; }
+    public abstract float LowerBobLimit { get; set; }
+    public abstract float UpperBobLimit { get; set; }
+    public abstract float Rotation { get; set; }
+    public abstract MeshRenderer MeshRenderer { get; set; }
+    public abstract GameObject InventoryIcon { get; set; }
+    public abstract GameObject InstantiatedInventoryIcon { get; set; }
 
-    void UseItem();
+    public abstract void UseItem();
 }
 

@@ -8,8 +8,9 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
-    private Item[] inventorySlots;
-    public Image[] slots;
+    public GameObject slotParent;
+    public Slot[] slots;
+
     public int numSlots;
 
     private Canvas myCanvas;
@@ -18,7 +19,7 @@ public class Inventory : MonoBehaviour
 
     public void Start()
     {
-        inventorySlots = new Item[numSlots];
+        slots = new Slot[numSlots];
         myCanvas = GetComponent<Canvas>();
     }
 
@@ -26,12 +27,12 @@ public class Inventory : MonoBehaviour
     {
         for (int i = 0; i < numSlots; i++)
         {
-            if(inventorySlots[i] == null)continue;
-            if (inventorySlots[i].InstantiatedInventoryIcon == null)
+            if(slots[i].item == null)continue;
+            if (slots[i].item.InstantiatedInventoryIcon == null)
             {
-                inventorySlots[i].InstantiatedInventoryIcon = Instantiate(inventorySlots[i].InventoryIcon);
-                inventorySlots[i].InstantiatedInventoryIcon.transform.parent = slots.ElementAt(i).transform;
-                inventorySlots[i].InstantiatedInventoryIcon.transform.localPosition = Vector3.zero;
+                slots[i].item.InstantiatedInventoryIcon = Instantiate(slots[i].item.InventoryIcon);
+                slots[i].item.InstantiatedInventoryIcon.transform.parent = slots.ElementAt(i).transform;
+                slots[i].item.InstantiatedInventoryIcon.transform.localPosition = Vector3.zero;
             }
 
         }
@@ -42,7 +43,7 @@ public class Inventory : MonoBehaviour
     public void ClickedSlot(int slotNum)
     {
         // do nothing if no item.
-        if (inventorySlots[slotNum] == null) return;
+        if (slots[slotNum].item == null) return;
 
 
     }
@@ -50,9 +51,9 @@ public class Inventory : MonoBehaviour
     public int FirstEmptySlot()
     {
 
-        for(int i = 0; i < numSlots; i++)
+        for (int i = 0; i < numSlots; i++)
         {
-            if (inventorySlots[i] == null) return i;
+            if (slots[i].item == null) return i;
         }
 
         return -1;
@@ -69,8 +70,8 @@ public class Inventory : MonoBehaviour
     // if an Item is already in that slot it will return the item 
     public Item ItemToSlot(Item item, int slot)
     {
-        Item retItem = inventorySlots[slot];
-        inventorySlots[slot] = item;
+        Item retItem = slots[slot].item;
+        slots[slot].item = item;
         return retItem;
     }
 
