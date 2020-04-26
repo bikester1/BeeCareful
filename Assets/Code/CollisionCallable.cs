@@ -5,16 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Assets.Code
+
+public interface CollisionCallable
 {
-    public interface CollisionCallable
-    {
-        void OnCollisionEnter(Collision collision);
+    void OnCollisionEnter(Collision collision);
 
-        void OnCollisionStay(Collision collision);
+    void OnCollisionStay(Collision collision);
 
-        void OnCollisionExit(Collision collision);
+    void OnCollisionExit(Collision collision);
 
-        void OnTriggerEnter(Collider collider);
-    }
+    void OnTriggerEnter(Collider collider);
 }
+

@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
-class Inventory : MonoBehaviour
+public class Inventory : MonoBehaviour
 {
     private Item[] inventorySlots;
-    public Image[] Slots;
+    public Image[] slots;
     public int numSlots;
 
     private Canvas myCanvas;
@@ -30,11 +30,13 @@ class Inventory : MonoBehaviour
             if (inventorySlots[i].InstantiatedInventoryIcon == null)
             {
                 inventorySlots[i].InstantiatedInventoryIcon = Instantiate(inventorySlots[i].InventoryIcon);
-                inventorySlots[i].InstantiatedInventoryIcon.transform.parent = Slots.ElementAt(i).transform;
+                inventorySlots[i].InstantiatedInventoryIcon.transform.parent = slots.ElementAt(i).transform;
                 inventorySlots[i].InstantiatedInventoryIcon.transform.localPosition = Vector3.zero;
             }
 
         }
+
+        //buttons[10].
     }
 
     public void ClickedSlot(int slotNum)

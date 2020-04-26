@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Slot : MonoBehaviour
+public class Slot : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     public Item item;
+
+    public Inventory inventory;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,5 +18,15 @@ public class Slot : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        Debug.Log("Pointer Down Event");
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        Debug.Log("Pointer Up Event: " + eventData.selectedObject.GetHashCode());
     }
 }

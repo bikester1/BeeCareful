@@ -150,7 +150,7 @@ public class Player : MonoBehaviour, CollisionCallable
         }
     }
 
-    void OnCollisionEnter(Collision collision)
+    public void OnCollisionEnter(Collision collision)
     {
         // Ignore flowers
         if (collision.gameObject.GetComponent<Plant>() != null)
@@ -199,11 +199,6 @@ public class Player : MonoBehaviour, CollisionCallable
         List<ContactPoint> contacts = new List<ContactPoint>();
         collision.GetContacts(contacts);
         isGrounded = false;
-    }
-
-    void CollisionCallable.OnCollisionEnter(Collision collision)
-    {
-        throw new System.NotImplementedException();
     }
 
     public void OnTriggerEnter(Collider collider)
