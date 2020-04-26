@@ -7,6 +7,9 @@ public class PrefabManager : MonoBehaviour
     public GameObject flowerBasic;
     public GameObject bee;
     public GameObject hive;
+    public GameObject seedIcon;
+    [SerializeField]
+    public List<GameObject> objects;
 
 
     // Start is called before the first frame update

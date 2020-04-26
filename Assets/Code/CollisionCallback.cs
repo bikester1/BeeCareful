@@ -38,4 +38,10 @@ public class CollisionCallback : MonoBehaviour
         if (callableObject == null) callableObject = calledObject.GetComponent<CollisionCallable>();
         callableObject.OnCollisionExit(collision);
     }
+
+    void OnTriggerEnter(Collider collider)
+    {
+        if (callableObject == null) callableObject = calledObject.GetComponent<CollisionCallable>();
+        callableObject.OnTriggerEnter(collider);
+    }
 }

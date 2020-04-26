@@ -102,8 +102,18 @@ public class Player : MonoBehaviour, CollisionCallable
             jumpTimer = 0;
         }
 
+        if (Input.GetKeyDown(KeyCode.I) && myInventory.GetComponent<Canvas>().enabled == false)
+        {
+            myInventory.GetComponent<Canvas>().enabled = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape) && myInventory.GetComponent<Canvas>().enabled == true)
+        {
+            myInventory.GetComponent<Canvas>().enabled = false;
+        }
+
         // jump
-        if(isGrounded && jumped)
+        if (isGrounded && jumped)
         {
             inputDir = Vector3.up;
             jumped = false;
@@ -141,28 +151,12 @@ public class Player : MonoBehaviour, CollisionCallable
         }
     }
 
-    void CollisionCallable.OnCollisionEnter(Collision collision)
+    public void OnCollisionEnter(Collision collision)
     {
         // Ignore flowers
         if (collision.gameObject.GetComponent<Plant>() != null)
         {
             Physics.IgnoreCollision(collision.collider, myCollider);
-        }
-
-        if(collision.gameObject.GetComponent<Item>() != null)
-        {
-            Item item = collision.gameObject.GetComponent<Item>();
-            int slot = myInventory.FirstEmptySlot();
-
-            // inventory full
-            if (slot == -1) 
-            {
-                Physics.IgnoreCollision(collision.collider, myCollider);
-                return; 
-            }
-
-            item.MeshRenderer.enabled = false;
-            myInventory.ItemToSlot(item, slot);
         }
 
         // Determine if grounded.
@@ -184,22 +178,6 @@ public class Player : MonoBehaviour, CollisionCallable
         if (collision.gameObject.GetComponent<Plant>() != null)
         {
             Physics.IgnoreCollision(collision.collider, myCollider);
-        }
-
-        if (collision.gameObject.GetComponent<Item>() != null)
-        {
-            Item item = collision.gameObject.GetComponent<Item>();
-            int slot = myInventory.FirstEmptySlot();
-
-            // inventory full
-            if (slot == -1)
-            {
-                Physics.IgnoreCollision(collision.collider, myCollider);
-                return;
-            }
-
-            item.MeshRenderer.enabled = false;
-            myInventory.ItemToSlot(item, slot);
         }
 
         // Determine if grounded
@@ -224,6 +202,24 @@ public class Player : MonoBehaviour, CollisionCallable
         isGrounded = false;
     }
 
+    public void OnTriggerEnter(Collider collider)
+    {
+        if (collider.gameObject.GetComponent<Item>() != null)
+        {
+            Item item = collider.gameObject.GetComponent<Item>();
+            int slot = myInventory.FirstEmptySlot();
+
+            // inventory full
+            if (slot == -1)
+            { 
+                return;
+            }
+
+            item.MeshRenderer.enabled = false;
+            collider.enabled = false;
+            myInventory.ItemToSlot(item, slot);
+        }
+    }
 
     void TempAnim()
     {

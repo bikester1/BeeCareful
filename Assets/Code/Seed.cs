@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Windows.WebCam;
 
-public class Seed : MonoBehaviour, Item
+public class Seed : Item
 {
 
     [SerializeField]
@@ -15,16 +15,21 @@ public class Seed : MonoBehaviour, Item
     [SerializeField]
     private MeshRenderer myMeshRenderer;
     [SerializeField]
-    private Sprite inventoryIcon;
+    private GameObject inventoryIcon;
+    [SerializeField]
+    private GameObject instantiatedInventoryIcon;
 
 
-    public float LowerBobLimit { get => lowerBobLimit; set => lowerBobLimit = value; }
-    public float UpperBobLimit { get => upperBobLimit; set => upperBobLimit = value; }
-    public float Rotation { get => rotation; set => rotation = value; }
-    public MeshRenderer MeshRenderer { get => myMeshRenderer; set => myMeshRenderer = value; }
-    public Sprite InventoryIcon { get => inventoryIcon; set => inventoryIcon = value; }
+    public override float LowerBobLimit { get => lowerBobLimit; set => lowerBobLimit = value; }
+    public override float UpperBobLimit { get => upperBobLimit; set => upperBobLimit = value; }
+    public override float Rotation { get => rotation; set => rotation = value; }
+    public override MeshRenderer MeshRenderer { get => myMeshRenderer; set => myMeshRenderer = value; }
+    public override GameObject InventoryIcon { get => inventoryIcon; set => inventoryIcon = value; }
+    public override GameObject InstantiatedInventoryIcon { get => instantiatedInventoryIcon; set => instantiatedInventoryIcon = value; }
 
-    public void UseItem()
+    private PrefabManager prefabManager;
+
+    public override void UseItem()
     {
         throw new System.NotImplementedException();
     }
@@ -32,7 +37,8 @@ public class Seed : MonoBehaviour, Item
     // Start is called before the first frame update
     void Start()
     {
-        
+        prefabManager = GameObject.FindObjectOfType<PrefabManager>();
+        inventoryIcon = prefabManager.seedIcon;
     }
 
     // Update is called once per frame

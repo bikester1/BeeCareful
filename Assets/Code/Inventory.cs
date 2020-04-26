@@ -4,28 +4,46 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
 
-class Inventory : MonoBehaviour
+public class Inventory : MonoBehaviour
 {
-    private Item[] inventorySlots;
+    public GameObject slotParent;
+    public Slot[] slots;
+
     public int numSlots;
 
+    private Canvas myCanvas;
+    
 
 
     public void Start()
     {
-        inventorySlots = new Item[numSlots];
+        slots = new Slot[numSlots];
+        myCanvas = GetComponent<Canvas>();
     }
 
     public void Update()
     {
-        
+        for (int i = 0; i < numSlots; i++)
+        {
+            if(slots[i].item == null)continue;
+            if (slots[i].item.InstantiatedInventoryIcon == null)
+            {
+                slots[i].item.InstantiatedInventoryIcon = Instantiate(slots[i].item.InventoryIcon);
+                slots[i].item.InstantiatedInventoryIcon.transform.parent = slots.ElementAt(i).transform;
+                slots[i].item.InstantiatedInventoryIcon.transform.localPosition = Vector3.zero;
+            }
+
+        }
+
+        //buttons[10].
     }
 
     public void ClickedSlot(int slotNum)
     {
         // do nothing if no item.
-        if (inventorySlots[slotNum] == null) return;
+        if (slots[slotNum].item == null) return;
 
 
     }
@@ -33,9 +51,9 @@ class Inventory : MonoBehaviour
     public int FirstEmptySlot()
     {
 
-        for(int i = 0; i < numSlots; i++)
+        for (int i = 0; i < numSlots; i++)
         {
-            if (inventorySlots[i] != null) return i;
+            if (slots[i].item == null) return i;
         }
 
         return -1;
@@ -52,8 +70,8 @@ class Inventory : MonoBehaviour
     // if an Item is already in that slot it will return the item 
     public Item ItemToSlot(Item item, int slot)
     {
-        Item retItem = inventorySlots[slot];
-        inventorySlots[slot] = item;
+        Item retItem = slots[slot].item;
+        slots[slot].item = item;
         return retItem;
     }
 
