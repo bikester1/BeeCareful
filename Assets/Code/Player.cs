@@ -39,6 +39,7 @@ public class Player : MonoBehaviour, CollisionCallable
     {
         ProcessInput();
         ProcessPhysics();
+        TempAnim();
     }
 
     private void LateUpdate()
@@ -219,4 +220,13 @@ public class Player : MonoBehaviour, CollisionCallable
             myInventory.ItemToSlot(item, slot);
         }
     }
+
+    void TempAnim()
+    {
+
+        myRigidbody.transform.LookAt(new Vector3(myRigidbody.velocity.x,0,myRigidbody.velocity.z) + myRigidbody.transform.position);
+        Debug.DrawLine(transform.position,new Vector3(myRigidbody.velocity.x, 0, myRigidbody.velocity.z));
+    }
+
 }
+
