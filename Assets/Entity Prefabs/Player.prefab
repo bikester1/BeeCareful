@@ -7217,7 +7217,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotParent: {fileID: 7147141508343482078}
   slots: []
-  numSlots: 45
+  numSlots: 36
 --- !u!1 &7713261664029863815
 GameObject:
   m_ObjectHideFlags: 0
