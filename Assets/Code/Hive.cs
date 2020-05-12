@@ -8,20 +8,26 @@ public class Hive : MonoBehaviour
     private GameObject newBee;
     private Vector3 spawnPosition;
     public float spawnOffset;
+    public int beeCount;
+    public Bee returningBee;
+    public float beeCooldownLength;
+    private float beeCooldownTimer;
 
     // Start is called before the first frame update
     void Start()
     {
         spawnPosition = transform.rotation * Vector3.forward * spawnOffset;
         spawnPosition += transform.position;
-        SpawnBee();
-
-
+        beeCount = 2;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (beeCount>0)
+        {
+            beeCooldown();
+        }
         
     }
 
@@ -29,5 +35,16 @@ public class Hive : MonoBehaviour
     {
         newBee = Instantiate(prefab.bee);
         newBee.GetComponent<Transform>().position = spawnPosition;
+        beeCount--;
+    }
+
+    void beeCooldown()
+    {
+        beeCooldownTimer += Time.deltaTime;
+        if (beeCooldownTimer == beeCooldownLength)
+        {
+            SpawnBee();
+            beeCooldownTimer = 0;
+        }
     }
 }

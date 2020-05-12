@@ -144,6 +144,7 @@ public class Bee : Entity, Debuggable
         {
             behaviorType = 2;
             targetObject = closestHive;
+            
             target = closestHive.transform.position;
             return;
         }
@@ -249,6 +250,12 @@ public class Bee : Entity, Debuggable
             {
                 Destroy(this.gameObject);
                 Destroy(this);
+            }
+            if (contacts[i].otherCollider.transform.tag.Contains("Hive"))
+            {
+                Destroy(this.gameObject);
+                Destroy(this);
+                targetObject.GetComponent<Hive>().beeCount++;
             }
         }
     }
