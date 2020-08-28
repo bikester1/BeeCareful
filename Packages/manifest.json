@@ -5,7 +5,10 @@
     "com.unity.ide.rider": "1.2.1",
     "com.unity.ide.visualstudio": "2.0.2",
     "com.unity.ide.vscode": "1.2.1",
+<<<<<<< HEAD
     "com.unity.terrain-tools": "3.0.1-preview",
+=======
+>>>>>>> 3e9c03c66f913f99d4b28a4cfc44a9c4eff7ae16
     "com.unity.test-framework": "1.1.16",
     "com.unity.textmeshpro": "3.0.1",
     "com.unity.timeline": "1.2.14",

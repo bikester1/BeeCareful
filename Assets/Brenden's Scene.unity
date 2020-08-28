@@ -692,7 +692,7 @@ TerrainCollider:
   m_Material: {fileID: 0}
   m_Enabled: 1
   m_TerrainData: {fileID: 15600000, guid: 724fb5d4a9ad92141849d1a7ee124180, type: 2}
-  m_EnableTreeColliders: 1
+  m_EnableTreeColliders: 0
 --- !u!218 &1111860421
 Terrain:
   m_ObjectHideFlags: 0
@@ -704,10 +704,10 @@ Terrain:
   serializedVersion: 6
   m_TerrainData: {fileID: 15600000, guid: 724fb5d4a9ad92141849d1a7ee124180, type: 2}
   m_TreeDistance: 5000
-  m_TreeBillboardDistance: 50
-  m_TreeCrossFadeLength: 5
-  m_TreeMaximumFullLODCount: 50
-  m_DetailObjectDistance: 80
+  m_TreeBillboardDistance: 1471
+  m_TreeCrossFadeLength: 105.9
+  m_TreeMaximumFullLODCount: 5278
+  m_DetailObjectDistance: 250
   m_DetailObjectDensity: 1
   m_HeightmapPixelError: 5
   m_SplatMapDistance: 1000
@@ -791,6 +791,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 397061157, guid: a2e552b419f653b4d8b8653aa7102f1d, type: 3}
       propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 570050066170791363, guid: a2e552b419f653b4d8b8653aa7102f1d,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2198464496930876721, guid: a2e552b419f653b4d8b8653aa7102f1d,
@@ -877,6 +882,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7629661190516479009, guid: a2e552b419f653b4d8b8653aa7102f1d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2e552b419f653b4d8b8653aa7102f1d, type: 3}

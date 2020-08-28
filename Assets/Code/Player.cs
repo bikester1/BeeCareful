@@ -102,6 +102,7 @@ public class Player : MonoBehaviour, CollisionCallable
             jumpTimer = 0;
         }
 
+        // Inventory
         if (Input.GetKeyDown(KeyCode.I) && myInventory.GetComponent<Canvas>().enabled == false)
         {
             myInventory.GetComponent<Canvas>().enabled = true;
@@ -147,7 +148,7 @@ public class Player : MonoBehaviour, CollisionCallable
     {
         if (!isGrounded)
         {
-            myRigidbody.velocity += Vector3.down * 1; 
+            myRigidbody.velocity += Vector3.down * 100 * Time.deltaTime; 
         }
     }
 
