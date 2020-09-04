@@ -17,5 +17,19 @@ public abstract class Item : MonoBehaviour
     public abstract GameObject InstantiatedInventoryIcon { get; set; }
 
     public abstract void UseItem();
+
+    public virtual void SendToInventory(Inventory inv) {
+        int slot = inv.FirstEmptySlot();
+
+        // inventory full
+        if (slot == -1)
+        {
+            return;
+        }
+
+        this.MeshRenderer.enabled = false;
+        this.GetComponent<Collider>().enabled = false;
+        inv.ItemToSlot(this, slot);
+    }
 }
 

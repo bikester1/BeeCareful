@@ -8,18 +8,16 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
-    public GameObject slotParent;
-    public Slot[] slots;
+    [SerializeField]
+    private GameObject slotParent;
 
-    public int numSlots;
-
+    private Slot[] slots;
     private Canvas myCanvas;
     
 
 
     public void Start()
     {
-        slots = new Slot[numSlots];
         myCanvas = GetComponent<Canvas>();
 
         slots = slotParent.GetComponentsInChildren<Slot>();
@@ -27,7 +25,7 @@ public class Inventory : MonoBehaviour
 
     public void Update()
     {
-        for (int i = 0; i < numSlots; i++)
+        for (int i = 0; i < slots.Length; i++)
         {
             if(slots[i].item == null)continue;
             if (slots[i].item.InstantiatedInventoryIcon == null)
@@ -53,7 +51,7 @@ public class Inventory : MonoBehaviour
     public int FirstEmptySlot()
     {
 
-        for (int i = 0; i < numSlots; i++)
+        for (int i = 0; i < slots.Length; i++)
         {
             if (slots[i].item == null) return i;
         }

@@ -208,17 +208,7 @@ public class Player : MonoBehaviour, CollisionCallable
         if (collider.gameObject.GetComponent<Item>() != null)
         {
             Item item = collider.gameObject.GetComponent<Item>();
-            int slot = myInventory.FirstEmptySlot();
-
-            // inventory full
-            if (slot == -1)
-            { 
-                return;
-            }
-
-            item.MeshRenderer.enabled = false;
-            collider.enabled = false;
-            myInventory.ItemToSlot(item, slot);
+            item.SendToInventory(myInventory);
         }
     }
 
