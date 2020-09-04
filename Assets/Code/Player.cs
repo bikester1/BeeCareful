@@ -214,9 +214,17 @@ public class Player : MonoBehaviour, CollisionCallable
 
     void TempAnim()
     {
-
-        myRigidbody.transform.LookAt(new Vector3(myRigidbody.velocity.x,0,myRigidbody.velocity.z) + myRigidbody.transform.position);
-        Debug.DrawLine(transform.position,new Vector3(myRigidbody.velocity.x, 0, myRigidbody.velocity.z));
+        Vector3 previousLook = myRigidbody.transform.rotation * Vector3.forward; 
+        myRigidbody.transform.rotation = Quaternion.LookRotation(
+            Vector3.Lerp(
+                previousLook,
+                new Vector3(myRigidbody.velocity.x,0,myRigidbody.velocity.z),
+                0.01f
+            ),  
+            Vector3.up
+        );
+        Debug.DrawLine(myRigidbody.transform.position,new Vector3(myRigidbody.velocity.x, 0, myRigidbody.velocity.z) + myRigidbody.transform.position);
+        Debug.DrawLine(myRigidbody.transform.position, previousLook + myRigidbody.transform.position);
     }
 
 }
