@@ -1,31 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Windows.WebCam;
 
 public class Seed : Item
 {
 
-    [SerializeField]
     private float lowerBobLimit;
-    [SerializeField]
     private float upperBobLimit;
-    [SerializeField]
     private float rotation;
-    [SerializeField]
+    private bool inInventory;
     private MeshRenderer myMeshRenderer;
-    [SerializeField]
     private GameObject inventoryIcon;
-    [SerializeField]
     private GameObject instantiatedInventoryIcon;
 
 
     public override float LowerBobLimit { get => lowerBobLimit; set => lowerBobLimit = value; }
     public override float UpperBobLimit { get => upperBobLimit; set => upperBobLimit = value; }
     public override float Rotation { get => rotation; set => rotation = value; }
-    public override MeshRenderer MeshRenderer { get => myMeshRenderer; set => myMeshRenderer = value; }
-    public override GameObject InventoryIcon { get => inventoryIcon; set => inventoryIcon = value; }
-    public override GameObject InstantiatedInventoryIcon { get => instantiatedInventoryIcon; set => instantiatedInventoryIcon = value; }
+    public override MeshRenderer MeshRenderer => myMeshRenderer;
+    public override GameObject InventoryIcon => inventoryIcon;
+    public override GameObject InstantiatedInventoryIcon { get => instantiatedInventoryIcon; protected set => instantiatedInventoryIcon = value;  }
+    public override bool isInInventory => inInventory;
+
 
     private PrefabManager prefabManager;
 
@@ -37,8 +35,10 @@ public class Seed : Item
     // Start is called before the first frame update
     void Start()
     {
+        myMeshRenderer = GetComponentInChildren<MeshRenderer>();
+        inventoryIcon = GetComponentInChildren<Image>().gameObject;
         prefabManager = GameObject.FindObjectOfType<PrefabManager>();
-        inventoryIcon = prefabManager.seedIcon;
+        //inventoryIcon = prefabManager.seedIcon;
     }
 
     // Update is called once per frame

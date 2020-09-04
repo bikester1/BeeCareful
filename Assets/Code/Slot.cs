@@ -43,15 +43,13 @@ public class Slot : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
                 // Attach icon to new slot
                 if (hoveredSlot.item != null)
                 {
-                    hoveredSlot.item.InstantiatedInventoryIcon.transform.SetParent(hoveredSlot.transform);
-                    hoveredSlot.item.InstantiatedInventoryIcon.transform.localPosition = Vector3.zero;
+                    hoveredSlot.item.SetParentSlot(hoveredSlot);
                 }
 
                 // attach replaced item to new slot
                 if(this.item != null)
                 {
-                    this.item.InstantiatedInventoryIcon.transform.SetParent(this.transform);
-                    this.item.InstantiatedInventoryIcon.transform.localPosition = Vector3.zero;
+                    this.item.SetParentSlot(this);
                 }
             }
         }

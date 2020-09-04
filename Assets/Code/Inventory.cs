@@ -13,8 +13,8 @@ public class Inventory : MonoBehaviour
 
     private Slot[] slots;
     private Canvas myCanvas;
-    
 
+    public Slot[] Slots { get => slots; }
 
     public void Start()
     {
@@ -25,17 +25,6 @@ public class Inventory : MonoBehaviour
 
     public void Update()
     {
-        for (int i = 0; i < slots.Length; i++)
-        {
-            if(slots[i].item == null)continue;
-            if (slots[i].item.InstantiatedInventoryIcon == null)
-            {
-                slots[i].item.InstantiatedInventoryIcon = Instantiate(slots[i].item.InventoryIcon);
-                slots[i].item.InstantiatedInventoryIcon.transform.SetParent(slots.ElementAt(i).transform);
-                slots[i].item.InstantiatedInventoryIcon.transform.localPosition = Vector3.zero;
-            }
-
-        }
 
         //buttons[10].
     }
