@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine.UI;
 using UnityEngine;
+using Unity.Profiling;
 
 public class Plant : MonoBehaviour, Debuggable
 {
@@ -14,38 +15,45 @@ public class Plant : MonoBehaviour, Debuggable
         Mature
     };
 
-    public bool isPollinated;
-    public bool beeInRange;
+    private bool pollinated;
+    private bool beeInRange;
     private float pollinationTimer;
-    public int timeToPollinate;
-    public int cooldown;
+    private int timeToPollinate;
+    private int cooldown;
     private float cooldownTimer;
-    public Bee currentBee; //PASS CLOSEST BEE TO PLANT
-    public bool occupied;
+    private bool occupied;
 
-    public float saplingAge;
-    public float maturityAge;
-    public float seedHydrationRequired;
-    public float saplingHydrationRequired;
-    public float matureHydrationRequired;
+    private float saplingAge;
+    private float maturityAge;
+    private float seedHydrationRequired;
+    private float saplingHydrationRequired;
+    private float matureHydrationRequired;
 
-    public Color seedColor;
-    public Color saplingColor;
-    public Color matureColor;
+    private Color seedColor;
+    private Color saplingColor;
+    private Color matureColor;
 
     private float age;
     private float hydration;
+    private float pollen;
     private growthState stage;
+
+    public bool IsOccupied { get => occupied; }
+    public float Hydration { get => hydration; }
+    public float Age { get => age; }
+    public float Pollen { get => pollen; }
 
 
     // Start is called before the first frame update
     void Start()
     {
         beeInRange = false;
-        isPollinated = false;
+        pollinated = false;
         occupied = false;
 
-        hydration = 2;
+        age = 0;
+        hydration = 0;
+        pollen = 0;
     }
 
     // Update is called once per frame
@@ -53,44 +61,18 @@ public class Plant : MonoBehaviour, Debuggable
     {
         if (!enabled) return;
 
-        if (beeInRange)
-        {
-            if (isPollinated)
-            {
-                // Bee finds out no necture
-                currentBee.changeBehaviorType(1);
-                currentBee.AddPlantToMemory(this);
-                beeInRange = false;
-            } else
-            {
-                pollinationTimer += Time.deltaTime;
-                if (pollinationTimer >= timeToPollinate)
-                {
-                    // bee finished getting necture
-                    isPollinated = true;
-                    occupied = false;
-                    pollinationTimer = 0;
-                    currentBee.changeBehaviorType(1);
-                    currentBee.AddPlantToMemory(this);
-                    beeInRange = false;
-                    currentBee.pollinated();
-                    currentBee = null;
-                }
-            }
-
-        }
 
         if (cooldownTimer >= cooldown)
         {
-            isPollinated = false;
+            pollinated = false;
             cooldownTimer = 0;
         }
-        if(isPollinated)cooldownTimer += Time.deltaTime;
+        if(pollinated)cooldownTimer += Time.deltaTime;
 
-        PlantGrowth();
+        ManageGrowth();
     }
 
-    private void PlantGrowth()
+    private void ManageGrowth()
     {
         if (age < saplingAge) stage = growthState.Seed;
         else if (age < maturityAge) stage = growthState.Sapling;
@@ -100,27 +82,34 @@ public class Plant : MonoBehaviour, Debuggable
         switch (stage)
         {
             case growthState.Seed:
-                transform.localScale = Vector3.zero;
-                if (hydration > seedHydrationRequired) age += Time.deltaTime;
+                GrowSeed();
                 break;
             case growthState.Sapling:
-                SetGrowthVisually((age - saplingAge)/maturityAge);
-                if (hydration > saplingHydrationRequired) age += Time.deltaTime;
+                GrowSappling();
                 break;
             case growthState.Mature:
-                UpdateMature();
-                if (hydration > matureHydrationRequired) age += Time.deltaTime;
+                GrowMature();
                 break;
         }
-
-
-
     }
 
-    public void AssignBee(Bee x)
+    private void GrowSeed()
     {
-        currentBee = x;
+        transform.localScale = Vector3.zero;
+        if (hydration > seedHydrationRequired) age += Time.deltaTime;
     }
+
+    private void GrowSappling()
+    {
+        SetGrowthVisually((age - saplingAge) / maturityAge);
+        if (hydration > saplingHydrationRequired) age += Time.deltaTime;
+    }
+
+    private void GrowMature()
+    {
+        if (hydration > matureHydrationRequired) age += Time.deltaTime;
+    }
+
 
     private void SetGrowthVisually(float percentGrown)
     {
@@ -128,11 +117,7 @@ public class Plant : MonoBehaviour, Debuggable
         transform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one, percentGrown);
     }
 
-    
-    private void UpdateMature()
-    {
-
-    }
+   
 
     //private float age;
     //private float hydration;
@@ -142,7 +127,7 @@ public class Plant : MonoBehaviour, Debuggable
     {
         StringBuilder sb = new StringBuilder();
         sb.Append("plant Object:" + this.GetHashCode());
-        sb.Append("\nPollinated:" + isPollinated);
+        sb.Append("\nPollinated:" + pollinated);
         sb.Append("\nIn Range:" + beeInRange);
         sb.Append("\nOccupation:" + occupied);
         sb.Append("\nTime To Depollinate:" + (cooldown - cooldownTimer));

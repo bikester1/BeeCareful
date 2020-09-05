@@ -221,17 +221,7 @@ public class Bee : Entity, Debuggable
         beeRigidBody.velocity = tempSwayData;
         beeRigidBody.transform.LookAt(target);
 
-        if (!targetObject.GetComponent<Plant>().occupied || targetObject.GetComponent<Plant>().currentBee == this)
-        {
-            targetObject.GetComponent<Plant>().AssignBee(this);
-            targetObject.GetComponent<Plant>().beeInRange = true;
-            targetObject.GetComponent<Plant>().occupied = true;
 
-        }else
-        {
-            AddPlantToMemory(targetObject.GetComponent<Plant>());
-            behaviorType = 1;
-        }
     }
 
     public void changeBehaviorType(int x)
