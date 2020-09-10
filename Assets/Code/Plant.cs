@@ -95,7 +95,7 @@ public class Plant : MonoBehaviour, Debuggable
     private void GrowSeed()
     {
         transform.localScale = Vector3.zero;
-        if (hydration > updateRate) 
+        if (hydration >= updateRate) 
         { 
             age += updateRate;
             hydration -= updateRate;
@@ -104,7 +104,7 @@ public class Plant : MonoBehaviour, Debuggable
 
     private void GrowSapling()
     {
-        if (hydration > updateRate)
+        if (hydration >= updateRate)
         {
             age += updateRate;
             hydration -= updateRate;
@@ -115,7 +115,7 @@ public class Plant : MonoBehaviour, Debuggable
 
     private void GrowMature()
     {
-        if (hydration > updateRate)
+        if (hydration >= updateRate)
         {
             pollen += updateRate;
             hydration -= updateRate;
