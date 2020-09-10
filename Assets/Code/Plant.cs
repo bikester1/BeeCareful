@@ -15,13 +15,12 @@ public class Plant : MonoBehaviour, Debuggable
         Mature
     };
 
-    private bool pollinated;
-    private bool beeInRange;
-    private float pollinationTimer;
-    private int timeToPollinate;
-    private int cooldown;
-    private float cooldownTimer;
     private bool occupied;
+
+    private float timeSinceUpdate;
+    private float updateRate = 1.0f;
+    // Only use this when debugging
+    private float growthRateMultiplier = 10.0f;
 
     private float saplingAge;
     private float maturityAge;
@@ -47,12 +46,13 @@ public class Plant : MonoBehaviour, Debuggable
     // Start is called before the first frame update
     void Start()
     {
-        beeInRange = false;
-        pollinated = false;
         occupied = false;
 
+        saplingAge = 60 * 1.0f;
+        maturityAge = 60 * 10.0f;
+        
         age = 0;
-        hydration = 0;
+        hydration = 1000;
         pollen = 0;
     }
 
@@ -61,15 +61,14 @@ public class Plant : MonoBehaviour, Debuggable
     {
         if (!enabled) return;
 
+        timeSinceUpdate += Time.deltaTime;
 
-        if (cooldownTimer >= cooldown)
+        if(timeSinceUpdate >= updateRate / growthRateMultiplier)
         {
-            pollinated = false;
-            cooldownTimer = 0;
+            // preserves frame errors by removing a second of time vs setting to 0
+            timeSinceUpdate -= updateRate / growthRateMultiplier;
+            ManageGrowth();
         }
-        if(pollinated)cooldownTimer += Time.deltaTime;
-
-        ManageGrowth();
     }
 
     private void ManageGrowth()
@@ -85,7 +84,7 @@ public class Plant : MonoBehaviour, Debuggable
                 GrowSeed();
                 break;
             case growthState.Sapling:
-                GrowSappling();
+                GrowSapling();
                 break;
             case growthState.Mature:
                 GrowMature();
@@ -96,20 +95,32 @@ public class Plant : MonoBehaviour, Debuggable
     private void GrowSeed()
     {
         transform.localScale = Vector3.zero;
-        if (hydration > seedHydrationRequired) age += Time.deltaTime;
+        if (hydration > updateRate) 
+        { 
+            age += updateRate;
+            hydration -= updateRate;
+        }
     }
 
-    private void GrowSappling()
+    private void GrowSapling()
     {
-        SetGrowthVisually((age - saplingAge) / maturityAge);
-        if (hydration > saplingHydrationRequired) age += Time.deltaTime;
+        if (hydration > updateRate)
+        {
+            age += updateRate;
+            hydration -= updateRate;
+        }
+
+        SetGrowthVisually((age - saplingAge) / (maturityAge - saplingAge));
     }
 
     private void GrowMature()
     {
-        if (hydration > matureHydrationRequired) age += Time.deltaTime;
+        if (hydration > updateRate)
+        {
+            pollen += updateRate;
+            hydration -= updateRate;
+        }    
     }
-
 
     private void SetGrowthVisually(float percentGrown)
     {
@@ -117,7 +128,16 @@ public class Plant : MonoBehaviour, Debuggable
         transform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one, percentGrown);
     }
 
-   
+    /// <summary>
+    /// adds hydration to plant and returns the amount of hydration to remove from hydration source.
+    /// </summary>
+    /// <param name="hydrationAmount"></param>
+    /// <returns></returns>
+   public float WaterPlant(float hydrationAmount)
+    {
+        hydration += hydrationAmount;
+        return hydrationAmount;
+    }
 
     //private float age;
     //private float hydration;
@@ -127,17 +147,13 @@ public class Plant : MonoBehaviour, Debuggable
     {
         StringBuilder sb = new StringBuilder();
         sb.Append("plant Object:" + this.GetHashCode());
-        sb.Append("\nPollinated:" + pollinated);
-        sb.Append("\nIn Range:" + beeInRange);
-        sb.Append("\nOccupation:" + occupied);
-        sb.Append("\nTime To Depollinate:" + (cooldown - cooldownTimer));
-        sb.Append("\nTime To Pollinate:" + (timeToPollinate - pollinationTimer));
         sb.Append("\nsaplingAge: " + saplingAge);
         sb.Append("\nmaturityAge: " + maturityAge);
         sb.Append("\nseedHydrationRequired: " + seedHydrationRequired);
         sb.Append("\nsaplingHydrationRequired: " + saplingHydrationRequired);
         sb.Append("\nmatureHydrationRequired: " + matureHydrationRequired);
         sb.Append("\nage: " + age);
+        sb.Append("\nPollen:" + pollen);
         sb.Append("\nhydration: " + hydration);
         sb.Append("\nstage: "+ stage);
         sb.Append("\nEnabled: " + enabled);
