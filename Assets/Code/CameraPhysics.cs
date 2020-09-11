@@ -149,4 +149,15 @@ public class CameraPhysics : MonoBehaviour
 
         }
     }
+
+    public void RaycastForItemUse(Item item)
+    {
+        Ray ray = myCam.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        {
+            item.UseItem(hit.transform.gameObject);
+        }
+    }
 }

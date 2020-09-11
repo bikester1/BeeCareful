@@ -30,8 +30,13 @@ public class Slot : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     // transfer item that was being dragged
     public void OnPointerUp(PointerEventData eventData)
     {
+        bool inInventory = false;
+
         foreach(GameObject gameObject in eventData.hovered)
         {
+            // checks if the object was dropped in an inventory screen or in the world
+            if (gameObject.GetComponent<Inventory>()) inInventory = true;
+
             // if a slot is being hovered over
             if(gameObject.GetComponent<Slot>() != null)
             {
@@ -52,6 +57,12 @@ public class Slot : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
                     this.item.SetParentSlot(this);
                 }
             }
+        }
+
+        // makes a request to the camera to use object in the world
+        if (!inInventory)
+        {
+            GetComponentInParent<Player>().GetComponentInChildren<CameraPhysics>().RaycastForItemUse(this.item);
         }
     }
 }

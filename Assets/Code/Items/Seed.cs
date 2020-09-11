@@ -27,7 +27,7 @@ public class Seed : Item
 
     private PrefabManager prefabManager;
 
-    public override void UseItem()
+    public override void UseItem(GameObject gameObject)
     {
         throw new System.NotImplementedException();
     }

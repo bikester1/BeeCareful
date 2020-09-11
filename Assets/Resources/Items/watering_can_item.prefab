@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7091735140072669320}
   - component: {fileID: 422462383264392158}
-  - component: {fileID: 4276782704748211694}
+  - component: {fileID: 4637414132819899752}
   m_Layer: 0
   m_Name: watering_can_item
   m_TagString: Untagged
@@ -48,7 +48,7 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0.11, z: 0}
---- !u!114 &4276782704748211694
+--- !u!114 &4637414132819899752
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -57,7 +57,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 904133876319548436}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0ef2f36dfa714640b9c3f3a68f6f099, type: 3}
+  m_Script: {fileID: 11500000, guid: ae0deb6094083184293da51b0d665f10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4276782704053363614
