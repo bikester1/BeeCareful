@@ -27,7 +27,6 @@ public class PrefabManager : MonoBehaviour
             items.Add(obj.name, obj);
         }
 
-        Debug.Log(items);
     }
 
     // Update is called once per frame
