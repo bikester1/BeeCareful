@@ -222,7 +222,7 @@ public class Player : MonoBehaviour, CollisionCallable
             Vector3.Lerp(
                 previousLook,
                 new Vector3(myRigidbody.velocity.x,0,myRigidbody.velocity.z),
-                0.01f
+                Time.deltaTime
             ),  
             Vector3.up
         );

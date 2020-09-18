@@ -16,7 +16,7 @@ public abstract class Item : MonoBehaviour
     public abstract GameObject InstantiatedInventoryIcon { get; protected set; }
     public abstract bool isInInventory { get; }
 
-    public abstract void UseItem();
+    public abstract void UseItem(GameObject gameObject);
 
     public virtual void SendToInventory(Inventory inv) 
     {

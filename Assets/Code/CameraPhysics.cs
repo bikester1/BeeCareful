@@ -22,7 +22,7 @@ public class CameraPhysics : MonoBehaviour
 
     private Camera myCam;
     private bool placing = false;
-    private GameObject placable;
+    private GameObject placeable;
     private Vector3 placementOffset;
 
     // needed to create prefabs
@@ -45,6 +45,11 @@ public class CameraPhysics : MonoBehaviour
         // Debug stuff
         myCanvas = myCam.GetComponentInChildren<Canvas>();
         myDebugText = myCanvas.GetComponentInChildren<Text>();
+
+        // Free Sync Gsync stuff
+        Application.targetFrameRate = -1;
+        Debug.Log(QualitySettings.vSyncCount);
+        QualitySettings.vSyncCount = 0;
     }
 
     // Update is called once per frame
@@ -78,7 +83,7 @@ public class CameraPhysics : MonoBehaviour
         this.transform.position = targetRigidbody.position + Quaternion.Euler(position.y, position.x, 0) * new Vector3(0, 0, -position.z);
         this.transform.LookAt(targetRigidbody.position, Vector3.up);
 
-        if (placable == null) placing = false;
+        if (placeable == null) placing = false;
         if (placing) UpdatePlant();
         else FindDebugObject();
 
@@ -100,15 +105,17 @@ public class CameraPhysics : MonoBehaviour
         if(Physics.Raycast(ray, out hit, Mathf.Infinity, mask))
         {
 
-            if(hit.transform.tag.Contains("Plantable")) placable.GetComponent<Transform>().position = hit.point + placementOffset;
+            if(hit.transform.tag.Contains("Plantable")) placeable.GetComponent<Transform>().position = hit.point + placementOffset;
 
         }
 
         if (Input.GetMouseButton(0))
         {
-            placable.GetComponent<MonoBehaviour>().enabled = true;
-            placable = null;
+            placeable.GetComponent<MonoBehaviour>().enabled = true;
+            if (placeable.GetComponent<Placeable>() != null) placeable.GetComponent<Placeable>().Place();
+            placeable = null;
             placing = false;
+
         }
     }
 
@@ -117,18 +124,18 @@ public class CameraPhysics : MonoBehaviour
         
         placing = true;
         placementOffset = Vector3.zero;
-        placable = Instantiate(prefabManager.flowerBasic);
-        placable.GetComponent<Transform>().position = new Vector3(0, -10000, 0);
-        placable.GetComponent<MonoBehaviour>().enabled = false;
+        placeable = Instantiate(prefabManager.flowerBasic);
+        placeable.GetComponent<Transform>().position = new Vector3(0, -10000, 0);
+        placeable.GetComponent<MonoBehaviour>().enabled = false;
     }
 
     private void placeBee()
     {
         placing = true;
         placementOffset = Vector3.up * 2;
-        placable = Instantiate(prefabManager.bee);
-        placable.GetComponent<Transform>().position = new Vector3(0, -10000, 0);
-        placable.GetComponent<MonoBehaviour>().enabled = false;
+        placeable = Instantiate(prefabManager.bee);
+        placeable.GetComponent<Transform>().position = new Vector3(0, -10000, 0);
+        placeable.GetComponent<MonoBehaviour>().enabled = false;
     }
 
     private void FindDebugObject()
@@ -147,6 +154,17 @@ public class CameraPhysics : MonoBehaviour
                 debugTarget = debugObj;
             }
 
+        }
+    }
+
+    public void RaycastForItemUse(Item item)
+    {
+        Ray ray = myCam.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        {
+            item.UseItem(hit.transform.gameObject);
         }
     }
 }

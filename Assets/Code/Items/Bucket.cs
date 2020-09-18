@@ -4,8 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Windows.WebCam;
 
-public class Seed : Item
+public class Bucket : Item
 {
+
+    private float hydration = 1000;
+    private float pourSize = 180;
 
     private float lowerBobLimit;
     private float upperBobLimit;
@@ -24,12 +27,17 @@ public class Seed : Item
     public override GameObject InstantiatedInventoryIcon { get => instantiatedInventoryIcon; protected set => instantiatedInventoryIcon = value;  }
     public override bool isInInventory => inInventory;
 
-
-    private PrefabManager prefabManager;
-
+    /// <summary>
+    /// depending on the object passed this item will fill the bucket or water a plant
+    /// </summary>
+    /// <param name="gameObject"></param>
     public override void UseItem(GameObject gameObject)
     {
-        throw new System.NotImplementedException();
+        if (gameObject.GetComponentInChildren<Plant>() != null)
+        {
+            if (hydration >= pourSize) hydration -= gameObject.GetComponentInChildren<Plant>().WaterPlant(pourSize);
+            return;
+        }
     }
 
     // Start is called before the first frame update
@@ -37,7 +45,6 @@ public class Seed : Item
     {
         myMeshRenderer = GetComponentInChildren<MeshRenderer>();
         inventoryIcon = GetComponentInChildren<Image>().gameObject;
-        prefabManager = GameObject.FindObjectOfType<PrefabManager>();
         //inventoryIcon = prefabManager.seedIcon;
     }
 
