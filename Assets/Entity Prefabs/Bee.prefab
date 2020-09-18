@@ -129,7 +129,8 @@ MonoBehaviour:
   beeRigidBody: {fileID: 1537878482982758127}
   detectionRadius: 30
   searchSpeed: 6
-  timeToChangeDirection: 15
+  directionTimer: 0
+  timeToChangeDirection: 5
   homingSpeed: 7
   pollinationCount: 4
 --- !u!1001 &1537878482811126199

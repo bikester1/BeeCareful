@@ -20,7 +20,8 @@ public class Bee : Entity, Debuggable
     [SerializeField] private Rigidbody beeRigidBody;
 
     #region Search Variables
-    [SerializeField] private float detectionRadius, searchSpeed, timeToChangeDirection;
+    [SerializeField] private float detectionRadius, searchSpeed, directionTimer, timeToChangeDirection;
+    private Vector3 randomTarget;
     #endregion
 
     #region Homing Variables
@@ -73,12 +74,13 @@ public class Bee : Entity, Debuggable
 
     void UpdateSearch()
     {
-        timeToChangeDirection -= Time.deltaTime;
-
-        if (timeToChangeDirection <=0)
+        directionTimer += Time.deltaTime;
+        if (directionTimer > timeToChangeDirection)
         {
             ChangeDirection();
+            directionTimer = 0;
         }
+        beeRigidBody.transform.LookAt(randomTarget);
         beeRigidBody.velocity = transform.forward.normalized * searchSpeed;
 
     }
@@ -89,13 +91,11 @@ public class Bee : Entity, Debuggable
         float myX = transform.position.x;
         float myZ = transform.position.z;
 
-        float xPos = UnityEngine.Random.Range(homeHive.transform.position.x - 70, homeHive.transform.position.x + 70);
-        float zPos = UnityEngine.Random.Range(homeHive.transform.position.z - 70, homeHive.transform.position.z + 70);
-        float angle = UnityEngine.Random.Range(30f, 330f);
+        float xPos = UnityEngine.Random.Range(myX - 50, myX + 50);
+        float zPos = UnityEngine.Random.Range(myZ - 50, myZ + 50);
 
-        Vector3 randomTarget = new Vector3(xPos, 4, zPos);
-
-        Vector3.Slerp(beeRigidBody.position, randomTarget, 5);
+        randomTarget = new Vector3(xPos, gameObject.transform.position.y, zPos);
+        
     }
 
     #endregion
