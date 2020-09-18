@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 1537878482982758124}
   - component: {fileID: 1537878482982758125}
   - component: {fileID: 1537878482982758127}
-  - component: {fileID: 1537878482982758112}
   - component: {fileID: 440573833}
+  - component: {fileID: -3357298459424859411}
   m_Layer: 0
   m_Name: Bee
   m_TagString: Debugable
@@ -28,14 +28,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1537878482982758113}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.7107625, y: 1.1141691, z: 1.5225122}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5777292157076712109}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1537878482982758124
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -59,6 +59,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -83,6 +84,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!54 &1537878482982758127
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -99,36 +101,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1537878482982758112
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1537878482982758113}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62beed0e465aa294ebef0f4bde63109c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  beeRigidBody: {fileID: 1537878482982758127}
-  forwardSpeed: 3
-  detectionRadius: 20
-  beeForgetTime: 90
-  maxPollinationCount: 3
-  aggroRange: 15
-  verticalSwaySpeed: 1
-  sidewaysSwaySpeed: 1
-  verticalAmplitude: 1
-  horizontalAmplitude: 1
-  maxRandTime: 3
-  findNewTarget: 1
-  targetRange: 2
-  heightDisplacement: 1
-  verticalHoverAmplitude: 0.1
-  sidewaysHoverAmplitude: 0.1
-  hoverVerticalSpeed: 1
-  hoverSidewaysSpeed: 1
 --- !u!135 &440573833
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -142,6 +114,24 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.35
   m_Center: {x: 0, y: -0.1, z: 0}
+--- !u!114 &-3357298459424859411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1537878482982758113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51662647ecbe8c147919474a57255ac4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  beeRigidBody: {fileID: 1537878482982758127}
+  detectionRadius: 30
+  searchSpeed: 6
+  timeToChangeDirection: 15
+  homingSpeed: 7
+  pollinationCount: 4
 --- !u!1001 &1537878482811126199
 PrefabInstance:
   m_ObjectHideFlags: 0

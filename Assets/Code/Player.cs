@@ -11,6 +11,7 @@ public class Player : MonoBehaviour, CollisionCallable
     public float jumpForgiveness;
     private float jumpTimer;
     private bool jumped = false;
+    private Vector3 playerPosition;
 
     private CapsuleCollider myCollider;
     private Camera myCam;
@@ -40,6 +41,8 @@ public class Player : MonoBehaviour, CollisionCallable
         ProcessInput();
         ProcessPhysics();
         TempAnim();
+        updatePlayerPos();
+        
     }
 
     private void LateUpdate()
@@ -225,6 +228,20 @@ public class Player : MonoBehaviour, CollisionCallable
         );
         Debug.DrawLine(myRigidbody.transform.position,new Vector3(myRigidbody.velocity.x, 0, myRigidbody.velocity.z) + myRigidbody.transform.position);
         Debug.DrawLine(myRigidbody.transform.position, previousLook + myRigidbody.transform.position);
+    }
+
+    void updatePlayerPos()
+    {
+        float myX = transform.position.x;
+        float myY = transform.position.y;
+        float myZ = transform.position.z;
+
+        playerPosition = new Vector3(myX, myY, myZ);
+    }
+
+    public Vector3 getPlayerPosition()
+    {
+        return playerPosition;
     }
 
 }
