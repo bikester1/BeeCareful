@@ -27,7 +27,10 @@ public class Bucket : Item
     public override GameObject InstantiatedInventoryIcon { get => instantiatedInventoryIcon; protected set => instantiatedInventoryIcon = value;  }
     public override bool isInInventory => inInventory;
 
-
+    /// <summary>
+    /// depending on the object passed this item will fill the bucket or water a plant
+    /// </summary>
+    /// <param name="gameObject"></param>
     public override void UseItem(GameObject gameObject)
     {
         if (gameObject.GetComponentInChildren<Plant>() != null)
