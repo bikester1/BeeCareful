@@ -17,11 +17,11 @@ public class Bee : Entity, Debuggable
     };
     private behaviorState behavior;
 
-    [SerializeField] private Rigidbody beeRigidBody;
-
+    [SerializeField] private Rigidbody beeRigidbody;
     #region Search Variables
-    [SerializeField] private float detectionRadius, searchSpeed, directionTimer, timeToChangeDirection;
-    private Vector3 randomTarget;
+    private float randomOffset, directionTimer;
+    [SerializeField] private float detectionRadius, searchSpeed, timeToChangeDirection, veritcalSwaySpeed, verticalAmplitude;
+    private Vector3 targetAngle, swayVector;
     #endregion
 
     #region Homing Variables
@@ -43,6 +43,8 @@ public class Bee : Entity, Debuggable
     void Start()
     {
         behavior = behaviorState.Search;
+        swayVector = Vector3.zero;
+        randomOffset = UnityEngine.Random.Range(0f, 2 * Mathf.PI);
 
     }
 
@@ -78,23 +80,29 @@ public class Bee : Entity, Debuggable
         if (directionTimer > timeToChangeDirection)
         {
             ChangeDirection();
-            directionTimer = 0;
+            directionTimer -= timeToChangeDirection;
         }
-        beeRigidBody.transform.LookAt(randomTarget);
-        beeRigidBody.velocity = transform.forward.normalized * searchSpeed;
+
+        Vector3 previousLook = beeRigidbody.transform.rotation * Vector3.forward;
+        beeRigidbody.transform.rotation = Quaternion.LookRotation(
+            Vector3.Lerp(
+                previousLook,
+                targetAngle,
+                Time.deltaTime * .5f
+            ),
+            Vector3.up
+        );
+        
+        beeRigidbody.velocity = transform.forward.normalized * searchSpeed;
+        swayVector.y = Mathf.Sin(Time.realtimeSinceStartup * veritcalSwaySpeed * randomOffset) * verticalAmplitude;
+        beeRigidbody.velocity += swayVector;
 
     }
 
     void ChangeDirection()
     {
-
-        float myX = transform.position.x;
-        float myZ = transform.position.z;
-
-        float xPos = UnityEngine.Random.Range(myX - 50, myX + 50);
-        float zPos = UnityEngine.Random.Range(myZ - 50, myZ + 50);
-
-        randomTarget = new Vector3(xPos, gameObject.transform.position.y, zPos);
+        float newHeading = UnityEngine.Random.Range(30f, 330f);
+        targetAngle = Quaternion.AngleAxis(newHeading, Vector3.up) * Vector3.forward;
         
     }
 
@@ -108,8 +116,10 @@ public class Bee : Entity, Debuggable
 
     void UpdateHoming() //The accuracy of Bee Homing Flights changes depending on closeness to bee hive, implement this
     {
-        beeRigidBody.transform.LookAt(homeHive.transform.position);
-        beeRigidBody.velocity = transform.forward.normalized * homingSpeed;
+        beeRigidbody.transform.LookAt(homeHive.transform.position);
+        beeRigidbody.velocity = transform.forward.normalized * homingSpeed;
+        swayVector.y = Mathf.Sin(Time.realtimeSinceStartup * veritcalSwaySpeed * randomOffset) * verticalAmplitude;
+        beeRigidbody.velocity += swayVector;
     }
     #endregion
 
