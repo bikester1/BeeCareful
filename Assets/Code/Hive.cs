@@ -35,6 +35,7 @@ public class Hive : MonoBehaviour
     {
         newBee = Instantiate(prefab.bee);
         newBee.GetComponent<Transform>().position = spawnPosition;
+        newBee.GetComponent<Bee>().HomeHive = this;
         beeCount--;
     }
 
