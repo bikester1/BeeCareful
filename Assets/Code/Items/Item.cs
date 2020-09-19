@@ -11,7 +11,7 @@ public abstract class Item : MonoBehaviour
     public abstract float LowerBobLimit { get; set; }
     public abstract float UpperBobLimit { get; set; }
     public abstract float Rotation { get; set; }
-    public abstract MeshRenderer MeshRenderer { get; }
+    public abstract MeshRenderer[] MeshRenderers { get; }
     public abstract GameObject InventoryIcon { get; }
     public abstract GameObject InstantiatedInventoryIcon { get; protected set; }
     public abstract bool isInInventory { get; }
@@ -28,7 +28,11 @@ public abstract class Item : MonoBehaviour
             return;
         }
 
-        this.MeshRenderer.enabled = false;
+
+        foreach(MeshRenderer renderer in MeshRenderers)
+        {
+            renderer.enabled = false;
+        }
         this.GetComponent<Collider>().enabled = false;
         inv.ItemToSlot(this, slot);
 

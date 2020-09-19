@@ -14,7 +14,7 @@ public class Bucket : Item
     private float upperBobLimit;
     private float rotation;
     private bool inInventory;
-    private MeshRenderer myMeshRenderer;
+    private MeshRenderer[] myMeshRenderers;
     private GameObject inventoryIcon;
     private GameObject instantiatedInventoryIcon;
 
@@ -22,7 +22,7 @@ public class Bucket : Item
     public override float LowerBobLimit { get => lowerBobLimit; set => lowerBobLimit = value; }
     public override float UpperBobLimit { get => upperBobLimit; set => upperBobLimit = value; }
     public override float Rotation { get => rotation; set => rotation = value; }
-    public override MeshRenderer MeshRenderer => myMeshRenderer;
+    public override MeshRenderer[] MeshRenderers => myMeshRenderers;
     public override GameObject InventoryIcon => inventoryIcon;
     public override GameObject InstantiatedInventoryIcon { get => instantiatedInventoryIcon; protected set => instantiatedInventoryIcon = value;  }
     public override bool isInInventory => inInventory;
@@ -43,7 +43,7 @@ public class Bucket : Item
     // Start is called before the first frame update
     void Start()
     {
-        myMeshRenderer = GetComponentInChildren<MeshRenderer>();
+        myMeshRenderers = GetComponentsInChildren<MeshRenderer>();
         inventoryIcon = GetComponentInChildren<Image>().gameObject;
         //inventoryIcon = prefabManager.seedIcon;
     }
