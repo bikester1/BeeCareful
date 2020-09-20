@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 2872999805267505342}
   - component: {fileID: 2872999805267505341}
   - component: {fileID: 2872999805267505340}
-  - component: {fileID: 6286678613508963489}
   - component: {fileID: 6427794444830379500}
   m_Layer: 0
   m_Name: Flower
@@ -31,6 +30,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 1.08, z: 20.35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 7952536934657112614}
   - {fileID: 232208749166929426}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -58,6 +58,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -82,19 +83,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &6286678613508963489
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2872999805267505337}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &6427794444830379500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,20 +96,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f81d9123dfc314e49a2d9ce8f85443be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPollinated: 0
-  beeInRange: 0
-  timeToPollinate: 5
-  cooldown: 20
-  currentBee: {fileID: 0}
-  occupied: 0
-  saplingAge: 1
-  maturityAge: 30
-  seedHydrationRequired: 1
-  saplingHydrationRequired: 1
-  matureHydrationRequired: 1
-  seedColor: {r: 0.5161979, g: 0.754717, b: 0.6958101, a: 0}
-  saplingColor: {r: 0.21226418, g: 1, b: 0.3784272, a: 0}
-  matureColor: {r: 0.14554203, g: 0.4528302, b: 0.13456745, a: 0}
+--- !u!1 &6577328760516551839
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7952536934657112614}
+  - component: {fileID: 142921474073607082}
+  m_Layer: 0
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7952536934657112614
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6577328760516551839}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2872999805267505342}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &142921474073607082
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6577328760516551839}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.43
+  m_Height: 2.23
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.71, z: 0}
 --- !u!1001 &5062692966553652488
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -166,7 +186,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 008b1b02466e2ee4594ef8d2417f54db,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 008b1b02466e2ee4594ef8d2417f54db,
         type: 3}

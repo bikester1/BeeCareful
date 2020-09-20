@@ -147,7 +147,7 @@ public class CameraPhysics : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
-            Debuggable debugObj = hit.transform.GetComponent<Debuggable>();
+            Debuggable debugObj = hit.transform.GetComponentInParent<Debuggable>();
             if(debugObj != null && Input.GetMouseButton(0))
             {
                 Debug.Log("New Debug Target");

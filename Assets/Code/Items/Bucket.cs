@@ -9,6 +9,7 @@ public class Bucket : Item
 
     private float hydration = 1000;
     private float pourSize = 180;
+    private float maxFill = 2000;
 
     private float lowerBobLimit;
     private float upperBobLimit;
@@ -33,10 +34,24 @@ public class Bucket : Item
     /// <param name="gameObject"></param>
     public override void UseItem(GameObject gameObject)
     {
-        if (gameObject.GetComponentInChildren<Plant>() != null)
+        if (gameObject.GetComponentInParent<Plant>() != null)
         {
-            if (hydration >= pourSize) hydration -= gameObject.GetComponentInChildren<Plant>().WaterPlant(pourSize);
+            if (hydration >= pourSize) hydration -= gameObject.GetComponentInParent<Plant>().WaterPlant(pourSize);
             return;
+        }
+
+        if(gameObject.GetComponentInChildren<Well>() != null)
+        {
+            if (hydration == maxFill) return;
+
+            if(hydration + pourSize <= maxFill)
+            {
+                hydration += pourSize;
+            }
+            else
+            {
+                hydration = maxFill;
+            }
         }
     }
 
