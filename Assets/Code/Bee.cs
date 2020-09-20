@@ -29,7 +29,11 @@ public class Bee : Entity, Debuggable
     #endregion
 
     #region Pollinating Variables
-    [SerializeField] private int pollinationCount;
+    [SerializeField] private int pollinationCount, maxPollinationCount, verticalHoverAmplitude;
+    Plant targetPlant;
+    [SerializeField] private Queue<Plant> memory;
+    private Queue<float> memoryTimes;
+    public float beeForgetTime;
     #endregion
 
     #region Attacking Variables
@@ -45,6 +49,9 @@ public class Bee : Entity, Debuggable
         behavior = behaviorState.Search;
         swayVector = Vector3.zero;
         randomOffset = UnityEngine.Random.Range(0f, 2 * Mathf.PI);
+
+        memory = new Queue<Plant>();
+        memoryTimes = new Queue<float>();
 
     }
 
@@ -74,8 +81,15 @@ public class Bee : Entity, Debuggable
         behavior = behaviorState.Search;
     }
 
+    // TEMP LINE BELOW
+    Plant flower;
     void UpdateSearch()
     {
+        if (flower != null && Vector3.Distance(flower.transform.position, transform.position) < detectionRadius)
+        {
+            StateToPollinating(flower);
+        }
+
         directionTimer += Time.deltaTime;
         if (directionTimer > timeToChangeDirection)
         {
@@ -124,14 +138,31 @@ public class Bee : Entity, Debuggable
     #endregion
 
     #region Pollinating Functions
-    void StateToPollinating()
+    void StateToPollinating(Plant target)
     {
+        targetPlant = target;
         behavior = behaviorState.Pollinating;
     }
 
     void UpdatePollinating()
     {
-        
+        if (homeHive != null && pollinationCount == maxPollinationCount)
+        {
+            StateToHoming();
+            return;
+        }
+
+      
+        swayVector.y = Mathf.Sin(Time.realtimeSinceStartup * veritcalSwaySpeed + randomOffset) * verticalHoverAmplitude;
+        beeRigidbody.velocity = swayVector;
+        beeRigidbody.transform.LookAt(targetPlant.transform.position);
+
+    }
+
+    public void AddPlantToMemory(Plant p)
+    {
+        memory.Enqueue(p);
+        memoryTimes.Enqueue(Time.realtimeSinceStartup);
     }
     #endregion
 
@@ -146,6 +177,8 @@ public class Bee : Entity, Debuggable
 
     }
     #endregion
+
+    
 
 
     public string GetDebugInfo()
