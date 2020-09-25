@@ -30,7 +30,7 @@ public class Bee : Entity, Debuggable
 
     #region Pollinating Variables
     [SerializeField] private int pollinationCount, maxPollinationCount, verticalHoverAmplitude;
-    Plant targetPlant;
+    GameObject targetPlant;
     [SerializeField] private Queue<Plant> memory;
     private Queue<float> memoryTimes;
     public float beeForgetTime;
@@ -87,7 +87,7 @@ public class Bee : Entity, Debuggable
     {
         if (flower != null && Vector3.Distance(flower.transform.position, transform.position) < detectionRadius)
         {
-            StateToPollinating(flower);
+            StateToPollinating(FindNearstOfType("Plant"));
         }
 
         directionTimer += Time.deltaTime;
@@ -120,6 +120,25 @@ public class Bee : Entity, Debuggable
         
     }
 
+    public GameObject FindNearstOfType(string type)
+    {
+        GameObject[] objects = GameObject.FindGameObjectsWithTag(type);
+        GameObject closestObject = null;
+        float leastDistance = Mathf.Infinity;
+        float tempDistance;
+        foreach (GameObject obj in objects)
+        {
+            tempDistance = Vector3.Distance(obj.transform.position, transform.position);
+            if (tempDistance < leastDistance && !memory.Contains(obj.GetComponent<Plant>()))
+            {
+                leastDistance = tempDistance;
+                closestObject = obj;
+            }
+        }
+
+        return closestObject;
+    }
+
     #endregion
 
     #region Homing
@@ -138,7 +157,7 @@ public class Bee : Entity, Debuggable
     #endregion
 
     #region Pollinating Functions
-    void StateToPollinating(Plant target)
+    void StateToPollinating(GameObject target)
     {
         targetPlant = target;
         behavior = behaviorState.Pollinating;
@@ -178,7 +197,28 @@ public class Bee : Entity, Debuggable
     }
     #endregion
 
-    
+    public void OnCollisionEnter(Collision collision)
+    {
+        ContactPoint[] contacts = new ContactPoint[collision.contactCount];
+        collision.GetContacts(contacts);
+
+        for (int i = 0; i < collision.contactCount; i++)
+        {
+            if (contacts[i].otherCollider.transform.tag.Contains("Player"))
+            {
+                Destroy(this.gameObject);
+                Destroy(this);
+            }
+            if (contacts[i].otherCollider.transform.tag.Contains("Hive"))
+            {
+                Destroy(this.gameObject);
+                Destroy(this);
+                homeHive.GetComponent<Hive>().beeCount++; //Create Getter Setter in Hive
+            }
+        }
+    }
+
+
 
 
     public string GetDebugInfo()

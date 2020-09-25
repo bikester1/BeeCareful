@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 1537878482982758113}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.7107625, y: 1.1141691, z: 1.5225122}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 5777292157076712109}
   m_Father: {fileID: 0}
@@ -129,12 +129,14 @@ MonoBehaviour:
   beeRigidbody: {fileID: 1537878482982758127}
   detectionRadius: 30
   searchSpeed: 6
-  directionTimer: 0
   timeToChangeDirection: 5
   veritcalSwaySpeed: 1
   verticalAmplitude: 1
   homingSpeed: 7
   pollinationCount: 4
+  maxPollinationCount: 0
+  verticalHoverAmplitude: 0
+  beeForgetTime: 0
 --- !u!1001 &1537878482811126199
 PrefabInstance:
   m_ObjectHideFlags: 0
